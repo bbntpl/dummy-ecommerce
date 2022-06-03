@@ -1,0 +1,66 @@
+{
+	"name": "shp",
+	"version": "0.1.0",
+	"private": true,
+	"dependencies": {
+		"react": "^17.0.0",
+		"react-dom": "^17.0.0",
+		"react-flip-move": "^3.0.4",
+		"react-scripts": "5.0.1",
+		"semantic-ui-less": "^2.4.1",
+		"semantic-ui-react": "^2.1.2",
+		"styled-components": "^5.3.5"
+	},
+	"scripts": {
+    "start": "craco start",
+    "build": "craco build",
+    "test": "craco test",
+    "eject": "craco eject"
+	},
+	"eslintConfig": {
+		"extends": [
+			"react-app",
+			"react-app/jest",
+			"plugin:react/jsx-runtime"
+		],
+		"rules": {
+			"max-lines": [
+				"error",
+				{
+					"max": 150
+				}
+			],
+			"indent": [
+				0,
+				"tab"
+			],
+			"quotes": [
+				2,
+				"single"
+			],
+			"comma-dangle": [
+				2,
+				"always-multiline"
+			]
+		}
+	},
+	"browserslist": {
+		"production": [
+			">0.2%",
+			"not dead",
+			"not op_mini all"
+		],
+		"development": [
+			"last 1 chrome version",
+			"last 1 firefox version",
+			"last 1 safari version"
+		]
+	},
+	"devDependencies": {
+		"@craco/craco": "^6.4.3",
+		"@semantic-ui-react/craco-less": "^2.0.2",
+		"@testing-library/jest-dom": "^5.16.4",
+		"@testing-library/react": "^12.1.2",
+		"@testing-library/user-event": "^13.5.0"
+	}
+}
