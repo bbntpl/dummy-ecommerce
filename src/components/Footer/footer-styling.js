@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { Segment, Grid, Button } from 'semantic-ui-react';
 import breakpoints from '../../util/breakpoints';
 
-const { size } = breakpoints;
+const { size, device } = breakpoints;
 
 export const StyledFooter = styled(Segment)`
 	background-color: #4dc5ac!important;
@@ -24,9 +24,14 @@ export const FooterLink = styled(Button)`
 	color: #4D0000!important;
 	font-weight: bold;
 	font-size: 1.5rem;
-	text-align: left;
-	@media only screen and (max-width: ${size.sm}){
-		text-align: center;
+	display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+	text-transform: uppercase;
+	@media only screen and ${device.lg}{
+		text-align: left;
+		justify-content: flex-start;
 	}
 	:hover{ text-decoration: underline; }
 `

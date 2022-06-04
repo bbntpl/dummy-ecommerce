@@ -1,8 +1,6 @@
 import styled from 'styled-components';
-import { Image, Segment } from 'semantic-ui-react';
-import breakpoints from '../../util/breakpoints';
-
-const { device } = breakpoints
+import { Segment } from 'semantic-ui-react';
+import { Link } from 'react-router-dom';
 
 export const StyledHeader = styled(Segment)`
 	width: 100%;
@@ -14,17 +12,8 @@ export const StyledHeader = styled(Segment)`
 	border: none!important;
 `;
 
-export const Logo = styled(Image)`
-@media only screen and ${device.lg}{
-	background-image: ${import('../../assets/logo/large-themerc-logo.png')
-		.then(logo => console.log(logo))}
-}
-@media only screen and ${device.sm}{
-	background-image: ${import('../../assets/logo/medium-themerc-logo.png')
-		.then(logo => console.log(logo))}
-}
-@media only screen and ${device.xs}{
-	background-image: ${import('../../assets/logo/xsmall-themerc-logo.png')
-		.then(logo => console.log(logo))}
-}
-`;
+export const ImageLink = styled(Link)`
+ > span > img {
+	 display: inline-block!important;
+ }
+`

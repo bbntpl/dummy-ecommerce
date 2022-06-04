@@ -1,6 +1,11 @@
+import {
+	BrowserRouter as Router,
+} from 'react-router-dom';
+
 import './App.css';
 import Footer from './components/Footer';
 import Header from './components/Header/Header';
+import Page from './components/Page';
 
 export default function App() {
 	// fetch('https://dummyjson.com/products?limit=60&skip=0')
@@ -11,10 +16,12 @@ export default function App() {
 	// 	.then(console.log);
 
 	return (
-		<div className="App">
-			<Header></Header>
-			{/* <Main></Main> */}
-			<Footer />
-		</div>
+		<Router>
+			<div className="App">
+				<Header />
+				<Page />
+				<Footer />
+			</div>
+		</Router>
 	);
 }

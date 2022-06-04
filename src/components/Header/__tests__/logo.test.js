@@ -1,8 +1,23 @@
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import Logo from '../Logo';
+import { BrowserRouter as Router } from 'react-router-dom';
+import DiffSizedLogos from '../Logo';
 
-it('should render an image', () => {
-	render(<Logo />);
-	console.log(screen);
-})
+it('should render the dynamically imported logos', async () => {
+	render(
+		<Router>
+			<DiffSizedLogos />
+		</Router>
+	);
+	const logo = await screen.findAllByAltText(/(\w+ logo)/i);
+	const filteredLogoAlts = logo.map(l => l.alt);
+	const areLogoAltsString = filteredLogoAlts.every(alt => typeof alt === 'string');
+	const uniqueLogos = Array.from(new Set(filteredLogoAlts));
+
+	// assert the valid type of logo alt texts
+	expect(areLogoAltsString).toBeTruthy();
+
+	// no duplicated logos assertion
+	// and return all expected logos
+	expect(uniqueLogos).toHaveLength(3);
+});

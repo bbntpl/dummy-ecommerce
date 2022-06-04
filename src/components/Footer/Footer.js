@@ -7,9 +7,9 @@ export default function Footer() {
 	return (
 		<StyledFooter>
 			<Container>
-				<Grid stackable>
+				<Grid stackable doubling>
 					<Grid.Row columns={2} verticalAlign='middle'>
-						<Grid.Column floated='left'>
+						<Grid.Column>
 							<CopyrightLink />
 						</Grid.Column>
 						<Grid.Column floated='right'>
