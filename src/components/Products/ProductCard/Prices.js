@@ -5,17 +5,17 @@ import {
 import DecimalPrecision from '../../../scripts/decimalPrecision';
 
 export default function ProductPrices({ price, discount }) {
-	const discountedPrice = price - (price * (discount / 100));
-	const roundedDiscountedPrice = DecimalPrecision.round(discountedPrice, 2);
+	const discountedPrice = (price - ((discount / 100) * price));
+	const roundedPriceBy2 = DecimalPrecision.round(discountedPrice, 2);
 	return (
 		<span>
 			<Price>
-				{discount ? roundedDiscountedPrice : price}
+				${discount ? roundedPriceBy2 : price}
 			</Price>
 			{
 				discount &&
 				<PrevPrice>
-					{price}
+					${price}
 				</PrevPrice>
 			}
 		</span>

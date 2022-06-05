@@ -1,0 +1,56 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render elements with written output 1`] = `
+<div>
+  <div
+    class="ui segment sc-bczRLJ craNiG"
+  >
+    <img
+      class="ui image sc-dkzDqf fJCDAp"
+      src="https://dummyjson.com/image/i/products/1/thumbnail.jpg"
+    />
+    <div
+      class="ui segment sc-bczRLJ sc-gsnTZi craNiG fSGMgO"
+    >
+      <a
+        href="/product/1"
+      >
+        <div
+          class="ui header sc-hKMtZM lagAId"
+        >
+          iPhone 9
+        </div>
+        -
+        <p>
+           ★ 
+          4.69
+        </p>
+      </a>
+      <p>
+        SAVE 40%
+      </p>
+      <span>
+        <p
+          class="sc-eCYdqJ laMpmR"
+        >
+          59.99
+        </p>
+        <p
+          class="sc-jSMfEi kKJmkR"
+        >
+          99.99
+        </p>
+      </span>
+      <button
+        class="ui large button"
+      >
+        <i
+          aria-hidden="true"
+          class="shopping cart icon"
+        />
+        Add to cart
+      </button>
+    </div>
+  </div>
+</div>
+`;

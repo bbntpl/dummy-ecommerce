@@ -1,31 +1,46 @@
-import { BrowserRouter as Router } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useReducer } from 'react';
 import './App.css';
 import Footer from './components/Footer';
 import Header from './components/Header/Header';
 import Page from './components/Page';
 
-export default function App() {
+import { stateReducer } from './scripts/reducers/stateReducer';
 
-	const [products, setProducts] = useState([]);
-	const [cart, setCart] = useState([]);
+const DUMMY_JSON_ARGS = { limit: 60, skip: 0 };
+const { limit, skip } = DUMMY_JSON_ARGS;
+const jsonURL = `https://dummyjson.com/products?limit=${limit}&skip=${skip}`;
+
+export default function App() {
+	const initialState = { products: [], cart: [] };
+	const [state, dispatch] = useReducer(stateReducer, initialState);
+	const [itemsArranger, setItemsArranger] = useState({
+		keyword: '',
+		sortBy: 'all',
+		orderBy: 'asc',
+	});
+
 	useEffect(() => {
-		fetch('https://dummyjson.com/products?limit=60&skip=0')
-		.then(res => res.json())
-		.then(data => setProducts(data.products));
+		fetch(jsonURL)
+			.then(res => res.json())
+			.then(data => dispatch({ type: 'initProducts', payload: data }));
 	}, []);
 
-	const propsForViews = {
-		products,
-		cart,
+	const handleItemsArranger = (value, type) => {
+		setItemsArranger(itemsArranger => ({ ...itemsArranger, [type]: value }));
 	}
+
+	const propsForViews = {
+		products: state.products,
+		cart: state.cart,
+		itemsArranger,
+		handleItemsArranger,
+	}
+	
 	return (
-		<Router>
-			<div className="App">
-				<Header />
-				<Page {...propsForViews} />
-				<Footer />
-			</div>
-		</Router>
+		<div className="App">
+			<Header />
+			<Page {...propsForViews} />
+			<Footer />
+		</div>
 	);
 }
