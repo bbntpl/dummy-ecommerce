@@ -1,7 +1,3 @@
-export default function NotFound() {
-	return (
-		<div>
-			NotFound
-		</div>
-	)
-}
+import NotFound from './NotFound';
+
+export default NotFound;
