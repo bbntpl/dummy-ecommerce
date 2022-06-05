@@ -24,12 +24,14 @@ export const MenuItem = styled(Menu.Item)`
 display: flex;
 align-items: center;
 margin: 0;
-margin-left: ${props => props.childType === 'button' ? '1.5' : '.75'}rem;
+&:not(first-child) {
+	margin-left: ${props => props.childType === 'button' ? '1.5' : '.75'}rem;
+}
 & > a {
 	display: flex;
 	align-items: center;
-	padding: .5rem 0;
 	color: #4D0000!important;
+	padding: .5rem 0;
 	font-weight: ${props => props.isActive ? 'bold' : 400};
 	text-transform: uppercase;
 	background:
@@ -43,6 +45,7 @@ margin-left: ${props => props.childType === 'button' ? '1.5' : '.75'}rem;
 	transition: 0.25s;
 	background-color: transparent;
 }
+
 & > a:hover {
 	background-size:100% 3px;
 }

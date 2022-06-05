@@ -7,7 +7,8 @@ import Cart from '../../views/Cart';
 import Shop from '../../views/Shop';
 import NotFound from '../../views/NotFound';
 
-export default function Page() {
+export default function Page(props) {
+	const { products } = props;
 	return useRoutes([
 		{
 			path: '*',
@@ -19,7 +20,7 @@ export default function Page() {
 		},
 		{
 			path: '/shop',
-			element: <Shop />,
+			element: <Shop products={products} />,
 		},
 		{
 			path: '/cart',

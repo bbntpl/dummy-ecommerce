@@ -7,7 +7,6 @@ export const StyledHeader = styled(Segment)`
 	background-color: #4dc5ac!important;
 	color: #4D0000!important;
 	padding: 2rem 1rem!important;
-	border: 2px solid black;
 	box-shadow: none!important;
 	border: none!important;
 `;

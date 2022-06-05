@@ -29,7 +29,7 @@ export const FooterLink = styled(Button)`
   justify-content: center;
   text-align: center;
 	text-transform: uppercase;
-	@media only screen and ${device.lg}{
+	@media only screen and ${device.sm}{
 		text-align: left;
 		justify-content: flex-start;
 	}
