@@ -1,7 +1,3 @@
-export default function Shop() {
-	return (
-		<div>
-			Shop
-		</div>
-	)
-}
+import Shop from './Shop';
+
+export default Shop;
