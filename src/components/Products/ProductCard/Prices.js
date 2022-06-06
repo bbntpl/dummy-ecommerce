@@ -3,14 +3,14 @@ import {
 	PrevPrice,
 } from './product-card-styling';
 import DecimalPrecision from '../../../scripts/decimalPrecision';
-
-export default function ProductPrices({ price, discount }) {
-	const discountedPrice = (price - ((discount / 100) * price));
-	const roundedPriceBy2 = DecimalPrecision.round(discountedPrice, 2);
+import { discountedPrice } from '../../../scripts/reusableFuncs';
+export default function ProductPrices(props) {
+	const { discount, price } = props;
+	const roundedPrice = DecimalPrecision.round(discountedPrice(price, discount), 2);
 	return (
 		<span>
 			<Price>
-				${discount ? roundedPriceBy2 : price}
+				${discount ? roundedPrice : price}
 			</Price>
 			{
 				discount &&

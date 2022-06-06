@@ -1,42 +1,30 @@
-import { useState } from 'react';
 import { Grid, Image } from 'semantic-ui-react';
 import { ImageLink } from './header-styling';
+import SmallLogo from '../../assets/logo/xsmall-themerc-logo.png';
+import MediumLogo from '../../assets/logo/medium-themerc-logo.png';
+import LargeLogo from '../../assets/logo/large-themerc-logo.png';
 
 const logoImports = [
-	{ device: 'mobile', size: 'xsmall' },
-	{ device: 'tablet', size: 'medium' },
-	{ device: 'computer', size: 'large' },
+	{ device: 'mobile', size: 'xsmall', src: SmallLogo },
+	{ device: 'tablet', size: 'medium', src: MediumLogo },
+	{ device: 'computer', size: 'large', src: LargeLogo },
 ];
 
 export default function DiffSizedLogos() {
-	const [imgSrcs, setImgSrcs] = useState({});
-
-	return logoImports.map(({ device, size }, i) => {
-
-		const loadImage = async (logoSize) => {
-			try {
-				const response = await import(`../../assets/logo/${logoSize}-themerc-logo.png`);
-				setImgSrcs(imageSrcs => ({
-					...imageSrcs, [logoSize]: response.default,
-				}));
-			} catch (err) {
-				console.log(err);
-			}
-		}
-		typeof imgSrcs[size] === 'undefined' && loadImage(size);
+	return logoImports.map(logo => {
+		const { device, size, src } = logo;
 		return (
-			<Grid.Column key={`${size}-logo${i}`} only={device}>
+			<Grid.Column only={device} key={size}>
 				<ImageLink to='/'>
-					<span>{
-						typeof imgSrcs[size] !== 'undefined' &&
+					<span>
 						<Image
 							className='logo'
-							src={imgSrcs[size]}
-							alt={`${imgSrcs[size].split('-')[0]} logo`}
+							src={src}
+							alt={`${size} logo`}
 						/>
-					}</span>
+					</span>
 				</ImageLink>
 			</Grid.Column>
 		)
-	})
+	});
 }

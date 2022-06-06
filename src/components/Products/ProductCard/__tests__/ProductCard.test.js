@@ -7,41 +7,57 @@ import ProductCard from '../index';
 const product = {
 	discountPercentage: 40,
 	id: 1,
+	category: 'phone',
 	price: 99.99,
 	rating: 4.69,
 	stock: 4,
 	thumbnail: 'https://dummyjson.com/image/i/products/1/thumbnail.jpg',
 	title: 'iPhone 9',
+	quantity: 0,
 }
 
-const addToCart = () => {
-	product.stock -= 1;
+const addItemToCart = () => {
+	product.quantity += 1;
+}
+
+const getItemQty = () => {
+	return product.quantity;
 }
 
 it('should render elements with written output', () => {
 	const { container } = render(
 		<Router>
-			<ProductCard product={product} addToCart={addToCart} />
+			<ProductCard
+				product={product}
+				addItemToCart={addItemToCart}
+				getItemQty={getItemQty}
+			/>
 		</Router>
 	);
 
 	expect(container).toMatchSnapshot();
 });
 
-it('disable addToCart button and replace text with out of stock', () => {
-	render(
+it('disable button and replace text with not enough stock', () => {
+	const RenderProductCard = () => (
 		<Router>
-			<ProductCard product={product} addToCart={addToCart} />
+			<ProductCard
+				product={product}
+				addItemToCart={addItemToCart}
+				getItemQty={getItemQty}
+			/>
 		</Router>
-	);
+	)
+	const { rerender } = render(<RenderProductCard />);
 	const button = screen.getByRole('button');
 
 	act(() => {
-		for (let i = 0; i > 4; i++) {
-			userEvent.click(screen.getByText(/add to cart/i));
+		for (let i = 0; i < product.stock; i++) {
+			userEvent.click(button);
 		}
 	});
 
+	rerender(<RenderProductCard />)
+	expect(button).toHaveTextContent('Not enough stock');
 	expect(button).toBeDisabled();
-	expect(button).toHaveValue('Out of stock');
 });

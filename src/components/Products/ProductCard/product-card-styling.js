@@ -1,23 +1,31 @@
 import styled from 'styled-components';
-import {
-	Segment,
-	Image,
-	Header,
-} from 'semantic-ui-react';
+import { Segment, Header } from 'semantic-ui-react';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 const productCardStyles = `
 	display: flex!important;
 	flex-direction: column!important;
 	width: 100%;
-	padding: 10px 0 ;
+	padding: 10px 0;
 `;
+
+const ThumbnailStyles = `
+	height: auto;
+	max-height: 350px;
+	width: fit-content;
+	max-width: 100%;
+`
 
 export const StyledProductCard = styled(Segment)`
 	${productCardStyles}
-	align-items: flex-between;
+	justify-content: space-between;
 	height: 100%;
 	& h3 {
 		font-size: 14px;
+	}
+	& > div:first-child {
+		display: flex;
+		justify-content: center;
 	}
 `
 
@@ -28,15 +36,22 @@ export const Details = styled(StyledProductCard)`
 	width: 100%;
 	align-items: center!important;
 	height: max-content;
+	& > a:hover {
+		text-decoration: underline;
+		& > div {
+			color: #4183C4!important;
+		}
+	}
 `;
 
-export const Thumbnail = styled(Image)`
-	height: max(250px, auto);
-	width: max(100%, 40%);
+export const StyledThumbnail = styled(LazyLoadImage)`
+	${ThumbnailStyles}
 `
 export const Title = styled(Header)`
 	display: inline!important;
 	font-size: clamp(1rem 3vw 3rem)!important;
+	color: #4D0000;
+	font-weight: 700!important;
 `
 
 export const Price = styled.p`

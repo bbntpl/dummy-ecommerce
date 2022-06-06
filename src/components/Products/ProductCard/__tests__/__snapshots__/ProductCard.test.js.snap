@@ -3,41 +3,55 @@
 exports[`should render elements with written output 1`] = `
 <div>
   <div
-    class="ui segment sc-bczRLJ craNiG"
+    class="ui segment sc-bczRLJ hhAjhe"
   >
-    <img
-      class="ui image sc-dkzDqf fJCDAp"
-      src="https://dummyjson.com/image/i/products/1/thumbnail.jpg"
-    />
+    <div>
+      <a
+        href="/product/1"
+      >
+        <span
+          class=" lazy-load-image-background blur"
+          style="color: transparent; display: inline-block; height: auto;"
+        >
+          <img
+            alt="phone1"
+            class="sc-dkzDqf ejUabZ"
+            height="auto"
+            src="https://dummyjson.com/image/i/products/1/thumbnail.jpg"
+          />
+        </span>
+      </a>
+    </div>
     <div
-      class="ui segment sc-bczRLJ sc-gsnTZi craNiG fSGMgO"
+      class="ui segment sc-bczRLJ sc-gsnTZi hhAjhe gpwsqt"
     >
       <a
         href="/product/1"
       >
         <div
-          class="ui header sc-hKMtZM lagAId"
+          class="ui header sc-hKMtZM ezvbUU"
         >
-          iPhone 9
+          iPhone 9 - 
         </div>
-        -
-        <p>
+        <span>
            ★ 
           4.69
-        </p>
+        </span>
       </a>
-      <p>
+      <h3>
         SAVE 40%
-      </p>
+      </h3>
       <span>
         <p
-          class="sc-eCYdqJ laMpmR"
+          class="sc-eCYdqJ idwgtc"
         >
-          59.99
+          $
+          NaN
         </p>
         <p
-          class="sc-jSMfEi kKJmkR"
+          class="sc-jSMfEi jzdFeH"
         >
+          $
           99.99
         </p>
       </span>

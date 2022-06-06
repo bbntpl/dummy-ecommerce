@@ -1,46 +1,48 @@
-import { Fragment } from 'react';
-import { Grid } from 'semantic-ui-react';
+import { Fragment, Suspense, useState, useEffect } from 'react';
+import { Grid, Loader } from 'semantic-ui-react';
 import ProductCard from '../ProductCard';
-import styled from 'styled-components';
+import ProductListContainer from './ProductListContainer';
 
-const StyledProductList = styled(Grid)`
-	background: transparent!
-`
+export default function ProductList(props) {
+	const { products, addItemToCart, getItemQty } = props;
+	const [isLoading, setIsLoading] = useState(true);
 
-const ProductListContainer = ({ columns, only, children }) => {
-	return (
-		<StyledProductList
-			container
-			centered
-			doubling
-			padded
-		>
-			<Grid.Row columns={columns} only={only} stretched>
-				{children}
-			</Grid.Row>
-		</StyledProductList>
-	)
-}
-
-export default function ProductList({ products }) {
 	// render iterated product card elements
 	const IteratedProducts = products.map((product, productIndex) => (
 		<Grid.Column key={`product-card${productIndex}`}>
-			<ProductCard product={product} />
+			<ProductCard
+				product={product}
+				addItemToCart={addItemToCart}
+				getItemQty={getItemQty}
+			/>
 		</Grid.Column>
-	))
+	));
+
+	useEffect(() => {
+		if(products.length !== IteratedProducts.length) {
+			setIsLoading(true);
+			return;
+		}
+		setTimeout(() => {
+			setIsLoading(false);
+		}, 100);
+	}, [products]);
 
 	return (
-		<Fragment>
-			<ProductListContainer columns={4} only='computer'>
-				{IteratedProducts}
-			</ProductListContainer>
-			<ProductListContainer columns={3} only='tablet'>
-				{IteratedProducts}
-			</ProductListContainer>
-			<ProductListContainer columns={1} only='mobile'>
-				{IteratedProducts}
-			</ProductListContainer>
-		</Fragment>
+		isLoading
+			? <Loader active>Loading</Loader>
+			: <Fragment>
+				<Suspense fallback={<Loader />}>
+					<ProductListContainer columns={4} only='computer'>
+						{IteratedProducts}
+					</ProductListContainer>
+					<ProductListContainer columns={3} only='tablet'>
+						{IteratedProducts}
+					</ProductListContainer>
+					<ProductListContainer columns={1} only='mobile'>
+						{IteratedProducts}
+					</ProductListContainer>
+				</Suspense>
+			</Fragment>
 	)
 }

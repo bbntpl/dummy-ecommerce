@@ -1,7 +1,9 @@
-export default function Product(){
-	return(
+export default function Product(props) {
+	return (
 		<div>
-			Product
+			<header>
+			{/* {product.title} */}
+			</header>
 		</div>
 	)
 }

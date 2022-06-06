@@ -5,3 +5,7 @@
 @textColor: #fff;
 @hoverBackgroundColor: #C85661;
 @hoverColor: #fff;
+@focusBackgroundColor: #C85661;
+@focusColor: #fff;
+@downBackgroundColor: #C85661;
+@downColor: #fff;

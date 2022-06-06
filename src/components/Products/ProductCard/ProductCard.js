@@ -2,13 +2,13 @@ import { Button, Icon } from 'semantic-ui-react';
 import {
 	StyledProductCard,
 	Details,
-	Thumbnail,
 } from './product-card-styling';
 import TitleRating from './TitleRating';
 import Prices from './Prices';
+import Thumbnail from './Thumbnail';
 
 export default function ProductCard(props) {
-	const { product, addToCart } = props;
+	const { product, addItemToCart, getItemQty } = props;
 	const {
 		id,
 		title,
@@ -16,11 +16,19 @@ export default function ProductCard(props) {
 		price,
 		rating,
 		stock,
+		category,
 		discountPercentage,
 	} = product;
+	const isStockMoreThanQty = stock > getItemQty(id);
+
+	// disallow to add item if quantity is more than the stock
+	const addItemToCartIfAvailable = (id) => {
+		if (!isStockMoreThanQty) return;
+		addItemToCart({ targetId: id });
+	}
 	return (
 		<StyledProductCard>
-			<Thumbnail src={thumbnail} />
+			<Thumbnail src={thumbnail} category={category} id={id}  />
 			<Details>
 				<TitleRating
 					title={title}
@@ -31,12 +39,12 @@ export default function ProductCard(props) {
 				<h3>{`SAVE ${discountPercentage}%`}</h3>
 				<Prices price={price} discount={discountPercentage} />
 				<Button
-					onClick={() => addToCart(id)}
+					onClick={() => addItemToCartIfAvailable(id)}
 					size='large'
-					disabled={stock === 0}
+					disabled={!isStockMoreThanQty}
 				>
 					<Icon name='shopping cart' />
-					{ stock ? 'Add to cart' : 'Out of stock'}
+					{isStockMoreThanQty ? 'Add to cart' : 'Not enough stock'}
 				</Button>
 			</Details>
 		</StyledProductCard>

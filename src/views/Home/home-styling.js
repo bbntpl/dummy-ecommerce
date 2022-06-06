@@ -50,12 +50,15 @@ export const HeroImage = styled(Image)`
 	@media only screen and ${device.xs} {
 		max-width: 430px!important;
 		right: 0;
+		opacity: .5;
 	}
 	@media only screen and ${device.sm}{
 		max-width: 530px!important;
+		opacity: 1;
 	}
 	@media only screen and ${device.lg}{
 		max-width: 630px!important;
+		opacity: 1;
 	}
 	width: 90%;
 	z-index: 30;

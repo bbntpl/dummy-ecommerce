@@ -1,29 +1,34 @@
-const getItemStock = (state, { targetId }) => {
-	const { products } = state;
-	return products.filter(item => targetId === item.id)[0].stock;
-}
-
 const getItemFromCart = (state, { targetId }) => {
-	const { cart } = state;
-	return cart.filter(item => targetId === item.id)[0];
+	const copiedArr = [...state.cart];
+	if (!copiedArr.length) return 0;
+	const filteredCart = copiedArr.filter(item => targetId === item.id);
+	return filteredCart.length ? filteredCart : 0;
 }
 
 const getItemFromProducts = (state, { targetId }) => {
-	const { products } = state;
-	return products.filter(item => targetId === item.id)[0];
+	const copiedArr = [...state.products];
+	return copiedArr.filter(item => targetId === item.id)[0];
 }
 
-const isItemExistsFromCart = (state, { cartItemId }) => {
-	return [...state.cart].some((item) => item.id === cartItemId);
+const getItemStock = (state, { targetId }) => {
+	return getItemFromProducts(state, { targetId }).stock || 0;
 }
 
-// increment num of items as a value
-// of property in an array object
+const getCartItemQty = (state, { targetId }) => {
+	const { quantity } = getItemFromCart(state, { targetId });
+	return quantity ? quantity : 0;
+}
+
+const isItemExistsFromCart = (state, { targetId }) => {
+	return [...state.cart].some((item) => item.id === targetId);
+}
+
+// increment the quantity of item from cart
 const incrementItem = (state, payload) => {
 	const { targetId, targetQty } = payload;
 	const copiedArray = [...state.cart];
 	const stock = getItemStock(state, { targetId });
-	const updatedProducts = copiedArray.map((product) => {
+	const updatedCart = copiedArray.map((product) => {
 		const { quantity } = product;
 
 		//requirements for pass validation to update quantity
@@ -39,16 +44,15 @@ const incrementItem = (state, payload) => {
 		}
 		return product;
 	});
-	return { ...state, products: updatedProducts }
+	return { ...state, cart: updatedCart }
 }
 
-// decrement num of items as a value
-// of property in an array object
+// increment the quantity of item from cart
 const decrementItem = (state, payload) => {
 	const { targetId, targetQty } = payload;
 	const copiedArray = [...state.cart];
 	const stock = getItemStock(state, { targetId });
-	const updatedProducts = copiedArray.map((product) => {
+	const updatedCart = copiedArray.map((product) => {
 		const { quantity } = product;
 
 		//requirements for pass validation to update quantity
@@ -56,84 +60,90 @@ const decrementItem = (state, payload) => {
 		const isStockMoreThanQty = stock > quantity;
 		const isTargetQtyValid = stock >= targetQty || 1;
 		if (isIdMatched && isStockMoreThanQty && isTargetQtyValid) {
-			return {
-				...product,
-				quantity: quantity - (targetQty || 1),
-			};
+			return { ...product, quantity: quantity - (targetQty || 1) };
 		}
 		return product;
 	});
-	return { ...state, products: updatedProducts }
+	return { ...state, cart: updatedCart }
 }
 
+const addObjItemToCart = (state, cartItemObj) => {
+	const copiedCartArr = [...state.cart];
+	const cartItemObjWithQty = { ...cartItemObj, quantity: 1 }
+	const updatedCartArr = copiedCartArr.concat([cartItemObjWithQty]);
+	return { ...state, cart: updatedCartArr };
+}
 
-
-const addItemToCart = (state, { itemId, targetQty }) => {
-	const { quantity } = getItemFromCart(state, { itemId });
+const addItemToCart = (state, { targetId, targetQty }) => {
+	const quantity = getCartItemQty(state, { targetId });
 	const {
 		thumbnail,
 		title,
 		price,
-		discount,
+		discountPercentage,
 		stock,
-	} = getItemFromProducts(state, { itemId });
+		id,
+	} = getItemFromProducts(state, { targetId });
 	if (stock > quantity) {
 		// increment quantity if this item is in cart already
-		if (isItemExistsFromCart(state, { itemId })) {
-			return incrementItem(state, { itemId, targetQty });
+		if (isItemExistsFromCart(state, { targetId })) {
+			return incrementItem(state, { targetId, targetQty });
 		} else {
-			// add cart item object to the cart array
-			const copiedCartArr = [...state.cart];
 			const cartItemProps = {
 				thumbnail,
 				title,
 				price,
-				discount,
+				discountPercentage,
 				stock,
+				id,
 			};
-			return { ...state, cart: copiedCartArr.concat([cartItemProps]) }
+			return addObjItemToCart(state, cartItemProps)
 		}
 	}
 }
 
 // decrement one quantity of item from cart
-const removeItemFromCart = (state, { itemId, targetQty }) => {
-	if (!isItemExistsFromCart(state, { itemId })) return;
-	return decrementItem(state, { itemId, targetQty });
+const decrementItemQty = (state, { targetId, targetQty }) => {
+	if (!isItemExistsFromCart(state, { targetId })) return;
+	return decrementItem(state, { targetId, targetQty });
 }
 
 // remove one specific item from cart ignoring the quantities
-const removeItemsFromCart = (state, { cartItemId }) => {
+const removeItemFromCart = (state, { targetId }) => {
 	const filteredArr = [...state.cart].filter((item) => {
-		return item.id !== cartItemId;
+		return item.id !== targetId;
 	})
 	return { ...state, cart: filteredArr };
 }
 
 // directly change the cart item quantity by user's choosing
-const setCartItemQty = (state, { cartItemId, quantity }) => {
+const setCartItemQty = (state, { targetId, quantity }) => {
 	const updatedCartItems = [...state.cart].map((item) => {
-		return item.id !== cartItemId ? { ...item, quantity } : item;
+		return item.id !== targetId ? { ...item, quantity } : item;
 	})
 	return { ...state, cart: updatedCartItems }
 }
 
 // initialize products
-const initProducts = (state, products) => ({ ...state, products });
+const initProducts = (state, products) => {
+	const copiedArr = [...state.products];
+	return { ...state, products: copiedArr.concat(products) }
+}
 
 export const stateReducer = (state, action) => {
-	switch (action.type) {
-		case 'initProducts':
-			return initProducts(action.payload);
-		case 'addToCart':
-			return addItemToCart(state, action.payload);
-		case 'setCartItemQty':
-			return setCartItemQty(state, action.payload);
-		case 'removeItemFromCart':
-			return removeItemFromCart(state, action.payload);
-		case 'removeItemsFromCart':
-			return removeItemsFromCart(state, action.payload);
-		case 'removeEverythingFromCart':
+	const { type, payload } = action;
+	switch (type) {
+		case 'INIT_PRODUCTS':
+			return initProducts(state, payload);
+		case 'ADD_ITEM_TO_CART':
+			return addItemToCart(state, payload);
+		case 'SET_ITEM_QTY':
+			return setCartItemQty(state, payload);
+		case 'DECREMENT_ITEM_QTY':
+			return decrementItemQty(state, payload);
+		case 'REMOVE_ITEM':
+			return removeItemFromCart(state, payload);
+		case 'REMOVE_ALL_ITEMS':
 			return { ...state, cart: [] };
 		default:
 			throw new Error('The passed action type is not recognized');
