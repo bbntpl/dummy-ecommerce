@@ -42,6 +42,15 @@ export const Details = styled(StyledProductCard)`
 			color: #4183C4!important;
 		}
 	}
+	& > .product-card__discount {
+		padding: 4px 8px;
+		border: 2px solid #141348;
+		border-radius: 12px;
+		font-size: 1rem;
+		width: fit-content;
+		font-weight: 500;
+		background: linear-gradient(45deg, gold, GreenYellow);
+	}
 `;
 
 export const StyledThumbnail = styled(LazyLoadImage)`
