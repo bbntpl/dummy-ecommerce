@@ -1,8 +1,5 @@
 import { Button, Icon } from 'semantic-ui-react';
-import {
-	StyledProductCard,
-	Details,
-} from './product-card-styling';
+import { StyledProductCard, Details } from './product-card-styling';
 import TitleRating from './TitleRating';
 import Prices from './Prices';
 import Thumbnail from './Thumbnail';
@@ -28,15 +25,14 @@ export default function ProductCard(props) {
 	}
 	return (
 		<StyledProductCard>
-			<Thumbnail src={thumbnail} category={category} id={id}  />
+			<Thumbnail src={thumbnail} category={category} id={id} />
 			<Details>
 				<TitleRating
 					title={title}
 					id={id}
 					rating={rating}
-					product={product}
 				/>
-				<h3>{`SAVE ${discountPercentage}%`}</h3>
+				<h3 className='product-card__discount'>{`SAVE ${discountPercentage}%`}</h3>
 				<Prices price={price} discount={discountPercentage} />
 				<Button
 					onClick={() => addItemToCartIfAvailable(id)}
