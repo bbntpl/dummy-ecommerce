@@ -1,5 +1,6 @@
 import { useState, useEffect, useReducer } from 'react';
 import './App.css';
+import 'react-lazy-load-image-component/src/effects/opacity.css';
 import Footer from './components/Footer';
 import Header from './components/Header/Header';
 import Page from './components/Page';

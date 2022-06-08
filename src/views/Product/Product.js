@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { Segment, Grid, Loader, Container } from 'semantic-ui-react';
+import { Segment, Grid, Loader } from 'semantic-ui-react';
 import styled from 'styled-components';
 
 import ProductDetails from '../../components/Products/ProductDetails';
@@ -21,42 +21,47 @@ export default function Product(props) {
 	} = props;
 	const { id } = useParams();
 
-	const [isLoading, setIsLoading] = useState(true);
-	const [product, setProduct] = useState();
 	const [products, setProducts] = useState(props.products || []);
+	const [product, setProduct] = useState();
+	const [isLoading, setIsLoading] = useState(true);
 
+	// reset states if the router params changes 
 	useEffect(() => {
-		if((!!product && isLoading)) {
+		if ((!!product && !isLoading)) {
 			setIsLoading(isLoading => !isLoading);
 			setProduct(undefined);
 		}
-	}, [props.id])
+	}, [id])
 
 	useEffect(() => {
-		if (!props.products.length) return;
-		setProducts(products => [...products, props.products]);
-	}, [props.products]);
-
+		if (products.length) return;
+		setProducts(products => [...products, ...props.products]);
+	}, [props.products, products.length]);
 
 	useEffect(() => {
 		if (typeof product !== 'undefined') return;
 
-		const productById = getProductById(Number(id));
+		// ensuring the products arr are fetched
+		const timer = setTimeout(() => {
+			const productById = getProductById(Number(id));
+			function getProductById(id) {
+				return products.reduce((result, product) => {
+					if (id === product.id) {
+						result.push(product);
+					}
+					return result
+				}, []);
+			}
 
-		function getProductById(id) {
-			return products.reduce((result, product) => {
-				if (id === product.id) {
-					result.push(product);
-				}
-				return result
-			}, []);
-		}
+			// set product as null if id param does not match the product id
+			// otherwise, initialize the product
+			setProduct(productById.length ? productById[0] : null);
+		}, products.length ? 0 : 1000);
 
-		// set product as null if id do not matches the product id
-		// otherwise initialize the product
-		setProduct(productById.length ? productById[0] : null);
-	}, [products]);
+		return () => clearTimeout(timer);
+	}, [products, id, product]);
 
+	console.log(product);
 	useEffect(() => {
 		// set loading to false if product has a value 
 		if (typeof product !== 'undefined') {
@@ -65,47 +70,48 @@ export default function Product(props) {
 	}, [product]);
 
 	return (
-		!isLoading && !product
-			? <NotFound />
-			: <StyledSegment>
-				{(isLoading && !product) && <Loader active>Loading</Loader>}
-				{(!isLoading && product) &&
-					<>
-						<Grid container stackable>
-							<Grid.Row columns={2} only='tablet computer'>
-								<Grid.Column>
-									<ProductGallery images={product.images} />
-								</Grid.Column>
-								<Grid.Column>
-									<ProductDetails
-										product={product}
-										setCartItemQty={setCartItemQty}
-										getItemQty={getItemQty}
-										resetCart={resetCart}
-									/>
-								</Grid.Column>
-							</Grid.Row>
-							<Grid.Row only='mobile'>
-								<Grid.Column>
-									<ProductDetails
-										product={product}
-										setCartItemQty={setCartItemQty}
-										getItemQty={getItemQty}
-										resetCart={resetCart}
-									/>
-								</Grid.Column>
-								<Grid.Column>
-									<ProductGallery images={product.images} />
-								</Grid.Column>
-							</Grid.Row>
-						</Grid>
-						<RelatedProductList
-							products={products}
-							productCategory={product.category}
-							productId={product.id}
-						/>
-					</>
-				}
-			</StyledSegment >
+		<StyledSegment>
+			{(isLoading && !product) && <Loader active>Loading</Loader>}
+			{(products.length && products.length < id) && <NotFound />}
+			{(!isLoading && product) &&
+				<>
+					<Grid container stackable>
+						<Grid.Row columns={2} only='tablet computer'>
+							<Grid.Column>
+								<ProductGallery images={product.images} />
+							</Grid.Column>
+							<Grid.Column>
+								<ProductDetails
+									product={product}
+									setCartItemQty={setCartItemQty}
+									getItemQty={getItemQty}
+									resetCart={resetCart}
+								/>
+							</Grid.Column>
+						</Grid.Row>
+						<Grid.Row only='mobile'>
+							<Grid.Column>
+								<ProductDetails
+									product={product}
+									setCartItemQty={setCartItemQty}
+									getItemQty={getItemQty}
+									resetCart={resetCart}
+								/>
+							</Grid.Column>
+							<Grid.Column>
+								<ProductGallery
+									images={product.images}
+								/>
+							</Grid.Column>
+						</Grid.Row>
+					</Grid>
+					<RelatedProductList
+						products={products}
+						productCategory={product.category}
+						productId={product.id}
+					/>
+				</>
+			}
+		</StyledSegment >
 	)
 }

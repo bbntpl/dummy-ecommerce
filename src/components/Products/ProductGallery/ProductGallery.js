@@ -10,6 +10,8 @@ function WideImageWrapper({ imageSrc }) {
 				alt={'wide-image'}
 				src={imageSrc}
 				effect='opacity'
+				height={350}
+				visibleByDefault
 			/>
 		</div>
 	)
@@ -26,6 +28,9 @@ function BottomGrid({ images, handleImageChange }) {
 					src={src}
 					onClick={() => handleImageChange(i + 1, src)}
 					alt={`image${i + 1}`}
+					height={90}
+					effect='opacity'
+					visibleByDefault
 				/>;
 			</div>
 		);
@@ -44,7 +49,7 @@ export default function ProductGallery({ images }) {
 	const totalImages = images.length;
 	const initialState = {
 		id: totalImages,
-		src: images[totalImages - 1],
+		src: images[images.length - 1],
 	};
 	const [wideImage, setWideImage] = useState(initialState);
 

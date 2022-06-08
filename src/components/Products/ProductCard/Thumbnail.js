@@ -10,7 +10,7 @@ export default function Thumbnail({ src, category, id }) {
 				<StyledThumbnail
 					alt={`${category}${id}`}
 					src={src}
-					effect='blur'
+					effect='opacity'
 					height={'auto'}
 					placeholder={
 						<Image
