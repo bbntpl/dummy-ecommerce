@@ -67,38 +67,29 @@ const decrementItem = (state, payload) => {
 	return { ...state, cart: updatedCart }
 }
 
-const addObjItemToCart = (state, cartItemObj) => {
+const addObjItemToCart = (state, { cartItemObj, targetQty }) => {
 	const copiedCartArr = [...state.cart];
-	const cartItemObjWithQty = { ...cartItemObj, quantity: 1 }
+	const cartItemObjWithQty = { ...cartItemObj, quantity: targetQty || 1 };
 	const updatedCartArr = copiedCartArr.concat([cartItemObjWithQty]);
 	return { ...state, cart: updatedCartArr };
 }
 
 const addItemToCart = (state, { targetId, targetQty }) => {
-	const quantity = getCartItemQty(state, { targetId });
-	const {
-		thumbnail,
-		title,
-		price,
-		discountPercentage,
-		stock,
-		id,
-	} = getItemFromProducts(state, { targetId });
-	if (stock > quantity) {
-		// increment quantity if this item is in cart already
-		if (isItemExistsFromCart(state, { targetId })) {
-			return incrementItem(state, { targetId, targetQty });
-		} else {
-			const cartItemProps = {
-				thumbnail,
-				title,
-				price,
-				discountPercentage,
-				stock,
-				id,
-			};
-			return addObjItemToCart(state, cartItemProps)
-		}
+	// increment quantity if this item is in cart already
+	if (isItemExistsFromCart(state, { targetId })) {
+		return incrementItem(state, { targetId, targetQty });
+	} else {
+		getItemFromProducts(state, { targetId })
+		const {
+			thumbnail,
+			title,
+			price,
+			discountPercentage,
+			stock,
+			id,
+		} = getItemFromProducts(state, { targetId });
+		const cartItemObj = { thumbnail, title, price, discountPercentage, stock, id };
+		return addObjItemToCart(state, { cartItemObj, targetQty });
 	}
 }
 
@@ -112,16 +103,13 @@ const decrementItemQty = (state, { targetId, targetQty }) => {
 const removeItemFromCart = (state, { targetId }) => {
 	const filteredArr = [...state.cart].filter((item) => {
 		return item.id !== targetId;
-	})
+	});
 	return { ...state, cart: filteredArr };
 }
 
 // directly change the cart item quantity by user's choosing
 const setCartItemQty = (state, { targetId, quantity }) => {
-	const updatedCartItems = [...state.cart].map((item) => {
-		return item.id !== targetId ? { ...item, quantity } : item;
-	})
-	return { ...state, cart: updatedCartItems }
+return addItemToCart(state, { targetId, targetQty: quantity });
 }
 
 // initialize products
@@ -143,7 +131,7 @@ export const stateReducer = (state, action) => {
 			return decrementItemQty(state, payload);
 		case 'REMOVE_ITEM':
 			return removeItemFromCart(state, payload);
-		case 'REMOVE_ALL_ITEMS':
+		case 'RESET_CART':
 			return { ...state, cart: [] };
 		default:
 			throw new Error('The passed action type is not recognized');

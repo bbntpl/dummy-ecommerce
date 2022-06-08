@@ -15,4 +15,4 @@ export const StyledNotFound = styled(Container)`
 		color: #c54d59;
 	}
 	& > a:hover { text-decoration: underline; }
-`
+`;

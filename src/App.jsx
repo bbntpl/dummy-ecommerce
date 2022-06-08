@@ -55,7 +55,7 @@ export default function App() {
 			setCartItemQty: (payload) => dispatch({ type: 'SET_ITEM_QTY', payload }),
 			decrementItemQty: (payload) => dispatch({ type: 'DECREMENT_ITEM_QTY', payload }),
 			removeItemFromCart: (payload) => dispatch({ type: 'REMOVE_ITEM', payload }),
-			removeEverythingFromCart: () => dispatch({ type: 'REMOVE_ALL_ITEMS' }),
+			resetCart: () => dispatch({ type: 'RESET_CART' }),
 		}
 	}
 

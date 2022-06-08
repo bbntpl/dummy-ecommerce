@@ -6,7 +6,7 @@ import DiffSizedLogos from './Logo';
 
 export default function Header() {
 	return (
-		<StyledHeader>
+		<StyledHeader className='App__header'>
 			<Grid stackable container doubling>
 				<Grid.Row columns={2} verticalAlign='middle'>
 					<DiffSizedLogos />					

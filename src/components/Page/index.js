@@ -7,6 +7,7 @@ import NotFound from '../../views/NotFound';
 import Product from '../../views/Product';
 
 export default function Page(props) {
+
 	const {
 		products,
 		cart,
@@ -15,12 +16,13 @@ export default function Page(props) {
 		mapDispatchToProps,
 		getItemQty,
 	} = props;
+
 	const {
 		addItemToCart,
 		setCartItemQty,
 		decrementItemQty,
 		removeItemFromCart,
-		removeEverythingFromCart,
+		resetCart,
 	} = mapDispatchToProps;
 
 	return useRoutes([
@@ -46,18 +48,19 @@ export default function Page(props) {
 			path: '/cart',
 			element: <Cart
 				setCartItemQty={setCartItemQty}
-				removeEverythingFromCart={removeEverythingFromCart}
+				removeEverythingresetCartFromCart={resetCart}
 				removeItemFromCart={removeItemFromCart}
+				decrementItemQty={decrementItemQty}
 				cart={cart}
 			/>,
 		},
 		{
 			path: '/shop/product/:id',
 			element: <Product
-				addItemToCart={addItemToCart}
-				decrementItemQty={decrementItemQty}
-				removeItemFromCart={removeItemFromCart}
+				resetCart={resetCart}
+				setCartItemQty={setCartItemQty}
 				products={products}
+				getItemQty={getItemQty}
 			/>,
 		},
 	])
