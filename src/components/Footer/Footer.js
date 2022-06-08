@@ -5,7 +5,7 @@ import CopyrightLink from './CopyrightLink';
 
 export default function Footer() {
 	return (
-		<StyledFooter>
+		<StyledFooter className='App__footer'>
 			<Container>
 				<Grid stackable doubling>
 					<Grid.Row columns={2} verticalAlign='middle'>

@@ -4,3 +4,6 @@ export const discountedPrice = (price, discount) => {
 export const removeDuplicates = (array) => {
 	return Array.from(new Set(array));
 }
+export const capitalizeFirstLetter = ([first, ...rest]) => {
+	return [first.toUpperCase(), ...rest].join('');
+}
