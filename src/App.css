@@ -10,6 +10,7 @@
 .App > *:not([class$='footer']):not([class$='header']) {
 	max-width: 100%;
 }
+
 .nav-item--active{
 	background-size:100% 3px!important;
 }
