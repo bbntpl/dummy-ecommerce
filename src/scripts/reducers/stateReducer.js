@@ -1,10 +1,3 @@
-const getItemFromCart = (state, { targetId }) => {
-	const copiedArr = [...state.cart];
-	if (!copiedArr.length) return 0;
-	const filteredCart = copiedArr.filter(item => targetId === item.id);
-	return filteredCart.length ? filteredCart : 0;
-}
-
 const getItemFromProducts = (state, { targetId }) => {
 	const copiedArr = [...state.products];
 	return copiedArr.filter(item => targetId === item.id)[0];

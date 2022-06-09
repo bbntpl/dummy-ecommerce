@@ -3,7 +3,6 @@ import styled from 'styled-components';
 
 const StyledCheckout = styled(Segment)`
 	display: flex;
-	position: sticky!important;
 	flex-direction: column;
 	& > .header {
 		margin: 0!important;
