@@ -14,11 +14,6 @@ const getItemStock = (state, { targetId }) => {
 	return getItemFromProducts(state, { targetId }).stock || 0;
 }
 
-const getCartItemQty = (state, { targetId }) => {
-	const { quantity } = getItemFromCart(state, { targetId });
-	return quantity ? quantity : 0;
-}
-
 const isItemExistsFromCart = (state, { targetId }) => {
 	return [...state.cart].some((item) => item.id === targetId);
 }
@@ -57,7 +52,7 @@ const decrementItem = (state, payload) => {
 
 		//requirements for pass validation to update quantity
 		const isIdMatched = product.id === targetId;
-		const isStockMoreThanQty = stock > quantity;
+		const isStockMoreThanQty = stock >= quantity;
 		const isTargetQtyValid = stock >= targetQty || 1;
 		if (isIdMatched && isStockMoreThanQty && isTargetQtyValid) {
 			return { ...product, quantity: quantity - (targetQty || 1) };

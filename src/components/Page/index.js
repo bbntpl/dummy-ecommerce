@@ -47,8 +47,8 @@ export default function Page(props) {
 		{
 			path: '/cart',
 			element: <Cart
-				setCartItemQty={setCartItemQty}
-				removeEverythingresetCartFromCart={resetCart}
+				addItemToCart={addItemToCart}
+				resetCart={resetCart}
 				removeItemFromCart={removeItemFromCart}
 				decrementItemQty={decrementItemQty}
 				cart={cart}

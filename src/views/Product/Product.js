@@ -61,7 +61,6 @@ export default function Product(props) {
 		return () => clearTimeout(timer);
 	}, [products, id, product]);
 
-	console.log(product);
 	useEffect(() => {
 		// set loading to false if product has a value 
 		if (typeof product !== 'undefined') {

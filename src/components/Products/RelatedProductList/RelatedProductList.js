@@ -44,6 +44,7 @@ function RelatedProductList(props) {
 	const { products, productCategory, productId } = props;
 	const [relatedProducts, setRelatedProducts] = useState();
 
+	// filter out products by category excluding the current viewed product
 	useEffect(() => {
 		const getProductsByCategory = products.filter((product) => {
 			const { category, id } = product;
