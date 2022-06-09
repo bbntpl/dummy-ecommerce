@@ -10,7 +10,7 @@ exports[`should render elements with written output 1`] = `
         href="/product/1"
       >
         <span
-          class=" lazy-load-image-background blur"
+          class=" lazy-load-image-background opacity"
           style="color: transparent; display: inline-block; height: auto;"
         >
           <img
@@ -23,7 +23,7 @@ exports[`should render elements with written output 1`] = `
       </a>
     </div>
     <div
-      class="ui segment sc-bczRLJ sc-gsnTZi hhAjhe gpwsqt"
+      class="ui segment sc-bczRLJ sc-gsnTZi hhAjhe eYfsyi"
     >
       <a
         href="/product/1"
@@ -38,7 +38,9 @@ exports[`should render elements with written output 1`] = `
           4.69
         </span>
       </a>
-      <h3>
+      <h3
+        class="product-card__discount"
+      >
         SAVE 40%
       </h3>
       <span>
@@ -46,7 +48,7 @@ exports[`should render elements with written output 1`] = `
           class="sc-eCYdqJ idwgtc"
         >
           $
-          NaN
+          59.99
         </p>
         <p
           class="sc-jSMfEi jzdFeH"

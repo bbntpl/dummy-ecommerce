@@ -40,8 +40,8 @@ export const RelatedProductBlock = styled.div`
 		font-size: 1.2rem;
 	}
 	& .rp-price--former {
-		color: grey;
-		text-transform: strikethrough;
+		color: #74767c;
+		text-decoration: line-through;
 	}
 	@media only screen and ${device.xs} {
 		& > .rp-image-wrapper {

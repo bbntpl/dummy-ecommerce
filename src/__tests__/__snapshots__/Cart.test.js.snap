@@ -1,0 +1,183 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`conditionally render components by value of passed prop should render cart features 1`] = `
+<div>
+  <div
+    class="ui segment sc-dkzDqf evJWkY"
+  >
+    <table
+      class="ui table"
+    >
+      <thead
+        class=""
+      >
+        <tr
+          class=""
+        >
+          <th
+            class=""
+          />
+          <th
+            class=""
+            colspan="4"
+          >
+            Cart (6 item
+            <span>
+              s)
+            </span>
+          </th>
+        </tr>
+      </thead>
+      <tbody
+        class=""
+      >
+        <tr
+          class=""
+        >
+          <td
+            class=""
+          >
+            1
+          </td>
+          <td
+            class=""
+          >
+            <img />
+          </td>
+          <td
+            class=""
+          >
+            <div>
+              <a
+                href="/shop/product/1"
+              >
+                <h2>
+                  title1
+                </h2>
+              </a>
+            </div>
+          </td>
+          <td
+            class=""
+          >
+            <div>
+              <input />
+            </div>
+            <div>
+              <button>
+                Remove item
+              </button>
+            </div>
+          </td>
+          <td
+            class=""
+          >
+            $ 8.08
+          </td>
+        </tr>
+      </tbody>
+      <tbody
+        class=""
+      >
+        <tr
+          class=""
+        >
+          <td
+            class=""
+          >
+            2
+          </td>
+          <td
+            class=""
+          >
+            <img />
+          </td>
+          <td
+            class=""
+          >
+            <div>
+              <a
+                href="/shop/product/2"
+              >
+                <h2>
+                  title2
+                </h2>
+              </a>
+            </div>
+          </td>
+          <td
+            class=""
+          >
+            <div>
+              <input />
+            </div>
+            <div>
+              <button>
+                Remove item
+              </button>
+            </div>
+          </td>
+          <td
+            class=""
+          >
+            $ 7.08
+          </td>
+        </tr>
+      </tbody>
+      <tfoot
+        class="full-width"
+      >
+        <tr
+          class=""
+        >
+          <th
+            class="right aligned"
+            colspan="4"
+          >
+            <button
+              class="ui button"
+            >
+              Remove all products
+            </button>
+          </th>
+          <th
+            class=""
+          >
+            <strong>
+              $ 46.47
+            </strong>
+          </th>
+        </tr>
+      </tfoot>
+    </table>
+    <div />
+  </div>
+</div>
+`;
+
+exports[`conditionally render components by value of passed prop should render placeholder element 1`] = `
+<div>
+  <div
+    class="ui segment sc-dkzDqf evJWkY"
+  >
+    <div
+      class="sc-gsnTZi bxqgoJ"
+    >
+      <img
+        class="ui image sc-bczRLJ koQZrw"
+        src="cart-img-placeholder.png"
+      />
+      <div
+        class="ui header"
+      >
+        Your cart is empty
+      </div>
+      <a
+        href="/shop"
+      >
+        Go shopping
+      </a>
+    </div>
+  </div>
+</div>
+`;
