@@ -5,7 +5,12 @@ import { Link } from 'react-router-dom';
 import { discountedPrice } from '../../../scripts/reusableFuncs';
 import DecimalPrecision from '../../../scripts/decimalPrecision';
 
-import { CartItemImage, ItemQuantityCounter } from './table-item-styling';
+import {
+	CartItemImage,
+	CartItemTitle,
+	ItemQuantityCounter,
+	ItemQuantityInputs,
+} from './table-item-styling';
 
 export default function TableItem(props) {
 	const {
@@ -35,53 +40,52 @@ export default function TableItem(props) {
 		} else {
 			decrementItemQty({ targetId: id });
 		}
-	}, [])
+	}, [quantity, removeItemFromCart, decrementItemQty]);
+
 	return (
 		<Table.Body>
 			<Table.Row>
 				<Table.Cell colSpan='1'>{indexId}</Table.Cell>
-				<Table.Cell as='td' colSpan='1'>
+				<Table.Cell colSpan='3'>
 					<CartItemImage>
 						<LazyLoadImage src={thumbnail} />
 					</CartItemImage>
 				</Table.Cell>
-				<Table.Cell colSpan='3'>
-					<div>
-						<Link to={`/shop/product/${id}`}>
-							<h2>{title}</h2>
-						</Link>
-					</div>
+				<Table.Cell colSpan='4'>
+					<Link to={`/shop/product/${id}`}>
+						<CartItemTitle>{title}</CartItemTitle>
+					</Link>
 				</Table.Cell>
-				<Table.Cell colSpan='3'>
-					<ItemQuantityCounter>
+				<Table.Cell colSpan='5'>
+					<ItemQuantityInputs>
+						<ItemQuantityCounter>
+							<button
+								className='decrement'
+								onClick={() => conditionalItemRemove(id)}
+							>
+								-
+							</button>
+							<span>
+								{`${quantity}`}
+							</span>
+							<button
+								className='increment'
+								disabled={isQtyMoreThanStock}
+								onClick={() => addItemToCart({ targetId: id })}
+							>
+								+
+							</button>
+						</ItemQuantityCounter>
 						<button
-							className='decrement'
-							onClick={() => conditionalItemRemove(id)}
-						>
-							-
-						</button>
-						<span>
-							{`${quantity}`}
-						</span>
-						<button
-							className='increment'
-							disabled={isQtyMoreThanStock}
-							onClick={() => addItemToCart({ targetId: id })}
-						>
-							+
-						</button>
-					</ItemQuantityCounter>
-					<div>
-						<button
-
+							className='simple-link'
 							onClick={() => removeItemFromCart({ targetId: id })}
 						>
 							Remove item
 						</button>
-					</div>
+					</ItemQuantityInputs>
 				</Table.Cell>
-				<Table.Cell colSpan='2'>
-					{`$ ${roundedPrice}`}
+				<Table.Cell colSpan='5' textAlign='center'>
+					{`$${roundedPrice}`}
 				</Table.Cell>
 			</Table.Row>
 		</Table.Body >

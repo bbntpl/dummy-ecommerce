@@ -14,7 +14,10 @@ const StyledGrid = styled(Grid)`
 	& .right-col--sticky{
 		width: 300px!important;
 		& > div {
+			margin-top: 30px;
 			position: sticky!important;
+			top: 0;
+			right: 0;
 		}
 	}
 `
@@ -83,18 +86,17 @@ export default function Cart(props) {
 									getTotalItems={getTotalItems}
 								/>
 							</Grid.Column>
-							<Grid.Column width={6} only='tablet' className='right-col--sticky'>
+							<Grid.Column
+								width={6}
+								only='tablet mobile'
+								className='right-col--sticky'
+								floated='right'
+							>
 								<Checkout
 									totalCost={totalCost}
 									getTotalItems={getTotalItems}
 								/>
 							</Grid.Column>
-							{/* <Grid.Column width={3} only='tablet computer'>
-								<Checkout
-									totalCost={totalCost}
-									getTotalItems={getTotalItems}
-								/>
-							</Grid.Column> */}
 						</Grid.Row>
 					</>
 					: <Placeholder />

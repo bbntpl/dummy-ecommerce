@@ -1,4 +1,4 @@
-import { Button, Header, Table, TableFooter } from 'semantic-ui-react';
+import { Header, Table, TableFooter } from 'semantic-ui-react';
 import TableItem from '../TableItem/TableItem';
 import { CartTableHeader, ItemCount } from './products-table-styling';
 
@@ -28,11 +28,11 @@ export default function ProductsTable(props) {
 	const { getTotalItems, resetCart, totalCost } = props;
 
 	return (
-		<Table>
+		<Table fixed unstackable>
 			<Table.Header>
 				<Table.Row>
 					<Table.HeaderCell />
-					<Table.HeaderCell colSpan='10'>
+					<Table.HeaderCell colSpan='17'>
 						<CartTableHeader>
 							<Header>
 								{'Cart '}
@@ -47,14 +47,17 @@ export default function ProductsTable(props) {
 			<IteratedProductList {...props} />
 			<TableFooter fullWidth>
 				<Table.Row>
-					<Table.HeaderCell colSpan='9' textAlign='right'>
-						<Button onClick={() => resetCart()}>
+					<Table.HeaderCell colSpan='13' textAlign='right'>
+						<button
+							className='simple-link'
+							onClick={() => resetCart()}
+						>
 							Remove all products
-						</Button>
+						</button>
 					</Table.HeaderCell>
-					<Table.HeaderCell>
+					<Table.HeaderCell colSpan='5' textAlign='center'>
 						<strong>
-							{`$ ${totalCost}`}
+							{`$${totalCost}`}
 						</strong>
 					</Table.HeaderCell>
 				</Table.Row>

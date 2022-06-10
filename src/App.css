@@ -14,3 +14,16 @@
 .nav-item--active{
 	background-size:100% 3px!important;
 }
+
+.simple-link {
+	border: none;
+	background-color: transparent;
+	font-size: .8rem;
+	cursor: pointer;
+	text-decoration: underline;
+	color: #414141;
+}
+
+.simple-link:hover {
+	color: black;
+}

@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import Cart from '../views/Cart';
 
@@ -24,24 +24,23 @@ const cartItems = [
 ];
 
 describe('conditionally render components by value of passed prop', () => {
-	it('should render placeholder element', () => {
+	it('should render empty card placeholder', () => {
 		const { container } = render(
-			<Router>
-				<Cart cart={[]} />
-			</Router>
+			<Router><Cart cart={[]} /></Router>
 		);
 
 		expect(container).toMatchSnapshot();
 	})
 
 	it('should render cart features', () => {
-		const { container } = render(
+		render(
 			<Router>
 				<Cart cart={cartItems} />
 			</Router>
 		);
 
-		expect(container).toMatchSnapshot();
+		const totalItems = screen.getAllByText(/6 items/i);
+		expect(totalItems).toBeTruthy();
 	})
 })
 
