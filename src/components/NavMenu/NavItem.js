@@ -1,26 +1,29 @@
-import { useState } from 'react';
-import NavItemLink from './NavItemLink';
-import NavButton from './NavButton';
+import { NavLink } from 'react-router-dom';
+import { MenuItem, IconBtn } from './nav-menu-styling';
 
 export default function NavItem(props) {
-	const { icon, linkTxt, to, childType } = props;
-	const [isActive, setIsActive] = useState(false);
-	const toggleActive = () => setIsActive(isActive => !isActive);
+	const {
+		icon,
+		linkTxt,
+		to,
+		childType,
+	} = props;
+	const { standard, active } = icon;
 	return (
-		to && childType === 'link' ?
-			<NavItemLink
-				icon={icon}
-				linkTxt={linkTxt}
-				to={to}
-				toggleActive={toggleActive}
-				isActive={isActive}
-				childType={childType}
-			/> : <NavButton
-				icon={icon}
-				childType={childType}
-				altTxt={linkTxt}
-				isActive={isActive}
-				toggleActive={toggleActive}
-			/>
+		<MenuItem as='li' childType={childType} >
+			<NavLink to={to} className={({ isActive }) =>
+				isActive ? 'nav-item--active' : undefined
+			}>
+				{({ isActive }) => (
+					<>
+						<IconBtn
+							src={isActive ? active : standard}
+							alt={linkTxt}
+						/>
+						{linkTxt}
+					</>
+				)}
+			</NavLink>
+		</MenuItem>
 	)
 }

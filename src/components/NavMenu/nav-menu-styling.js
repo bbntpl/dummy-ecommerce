@@ -55,12 +55,3 @@ export const IconBtn = styled.img`
 	width: 24px;
 	height: 24px;
 `
-
-export const StyledNavButton = styled(Button)`
-	background: transparent!important;
-	width: 24px;
-	height: 24px;
-	border: 1px solid black;
-	padding: 0!important;
-	margin: 0!important;
-`
