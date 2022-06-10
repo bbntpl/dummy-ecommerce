@@ -1,8 +1,8 @@
 import { useState, useEffect, memo } from 'react';
 import { Link } from 'react-router-dom';
 import { Container, Grid, Header, Image } from 'semantic-ui-react';
-import { discountedPrice } from '../../../scripts/reusableFuncs';
-import DecimalPrecision from '../../../scripts/decimalPrecision';
+import { discountedPrice } from '../../../js/reusableFuncs';
+import DecimalPrecision from '../../../js/decimalPrecision';
 import { RelatedProductBlock } from './related-product-list-styling';
 
 const MappedRelatedProducts = ({ relatedProducts }) => {
