@@ -4,8 +4,6 @@ import OutlineCartIcon from '../../assets/icons/outline-shopping-cart.svg';
 import SolidCartIcon from '../../assets/icons/solid-shopping-cart.svg';
 import OutlineBagIcon from '../../assets/icons/outline-shopping-bag.svg';
 import SolidBagIcon from '../../assets/icons/solid-shopping-bag.svg';
-import OutlineSettingsIcon from '../../assets/icons/outline-settings.png';
-import SolidSettingsIcon from '../../assets/icons/solid-settings.svg';
 
 const navProps = [
 	{
@@ -22,16 +20,9 @@ const navProps = [
 			standard: OutlineCartIcon,
 			active: SolidCartIcon,
 		},
-		linkTxt: 'Cart',
+		linkTxt: '',
 		to: '/cart',
 		childType: 'link',
-	},
-	{
-		icon: {
-			standard: OutlineSettingsIcon,
-			active: SolidSettingsIcon,
-		},
-		childType: 'button',
 	},
 ];
 
