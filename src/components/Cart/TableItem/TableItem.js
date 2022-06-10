@@ -2,8 +2,8 @@ import { useCallback } from 'react';
 import { Table } from 'semantic-ui-react';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { Link } from 'react-router-dom';
-import { discountedPrice } from '../../../scripts/reusableFuncs';
-import DecimalPrecision from '../../../scripts/decimalPrecision';
+import { discountedPrice } from '../../../js/reusableFuncs';
+import DecimalPrecision from '../../../js/decimalPrecision';
 
 import {
 	CartItemImage,

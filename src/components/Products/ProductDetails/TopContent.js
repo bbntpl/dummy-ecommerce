@@ -1,6 +1,6 @@
 import { StyledTopContent } from './product-details-styling';
-import { capitalizeFirstLetter } from '../../../scripts/reusableFuncs';
-import DecimalPrecision from '../../../scripts/decimalPrecision';
+import { capitalizeFirstLetter } from '../../../js/reusableFuncs';
+import DecimalPrecision from '../../../js/decimalPrecision';
 
 export default function TopContent(props) {
 	const { category, brand, title, rating } = props;

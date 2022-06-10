@@ -1,6 +1,6 @@
 import { StyledPrice } from './product-details-styling';
-import DecimalPrecision from '../../../scripts/decimalPrecision';
-import { discountedPrice } from '../../../scripts/reusableFuncs';
+import DecimalPrecision from '../../../js/decimalPrecision';
+import { discountedPrice } from '../../../js/reusableFuncs';
 
 export default function Price({ price, discountPercentage }) {
 	const moneySaved = DecimalPrecision.round(

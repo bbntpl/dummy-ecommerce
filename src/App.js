@@ -5,7 +5,7 @@ import Footer from './components/Footer';
 import Header from './components/Header/Header';
 import Page from './components/Page';
 
-import { stateReducer } from './scripts/reducers/stateReducer';
+import { stateReducer } from './js/reducers/stateReducer';
 
 const DUMMY_JSON_ARGS = { limit: 60, skip: 0 };
 const { limit, skip } = DUMMY_JSON_ARGS;

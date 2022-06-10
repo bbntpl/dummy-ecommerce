@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
 import DiffSizedLogos from '../Logo';
-import { removeDuplicates } from '../../../scripts/reusableFuncs';
+import { removeDuplicates } from '../../../js/reusableFuncs';
 
 it('should render the dynamically imported logos', async () => {
 	render(

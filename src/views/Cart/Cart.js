@@ -5,8 +5,8 @@ import ProductsTable from '../../components/Cart/ProductsTable';
 import Checkout from '../../components/Cart/Checkout';
 import Placeholder from '../../components/Cart/Placeholder';
 
-import { discountedPrice } from '../../scripts/reusableFuncs';
-import DecimalPrecision from '../../scripts/decimalPrecision';
+import { discountedPrice } from '../../js/reusableFuncs';
+import DecimalPrecision from '../../js/decimalPrecision';
 import styled from 'styled-components';
 
 const StyledGrid = styled(Grid)`
