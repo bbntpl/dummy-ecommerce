@@ -62,7 +62,8 @@
 				"files": [
 					"src/components/**",
 					"src/App*",
-					"src/views/**"
+					"src/views/**",
+					"**test.js"
 				],
 				"excludedFiles": "*.test.js",
 				"rules": {
@@ -75,7 +76,7 @@
 					"max-statements": [
 						"error",
 						{
-							"max": 12
+							"max": 15
 						}
 					]
 				}
@@ -100,5 +101,18 @@
 		"@testing-library/jest-dom": "^5.16.4",
 		"@testing-library/react": "^12.1.2",
 		"@testing-library/user-event": "^13.5.0"
+	},
+	"jest": {
+		"clearMocks": true,
+		"collectCoverageFrom": [
+			"**/*.{js,jsx}",
+			"!**/node_modules/**",
+			"!**/vendor/**"
+		],
+		"coveragePathIgnorePatterns": [
+			"<rootDir>/build/",
+			"<rootDir>/node_modules/",
+			"/vendor/"
+		]
 	}
 }

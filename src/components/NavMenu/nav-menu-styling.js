@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Menu, Button } from 'semantic-ui-react';
+import { Menu } from 'semantic-ui-react';
 import breakpoints from '../../util/breakpoints';
 
 const { device, size } = breakpoints;

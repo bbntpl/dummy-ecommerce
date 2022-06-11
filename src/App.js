@@ -14,10 +14,12 @@ const jsonURL = `https://dummyjson.com/products?limit=${limit}&skip=${skip}`;
 export default function App() {
 	const initialState = { products: [], cart: [] };
 	const [state, dispatch] = useReducer(stateReducer, initialState);
-	const [itemsArranger, setItemsArranger] = useState({
-		keyword: '',
-		category: 'all',
-		priceRange: 'all',
+	const [filterKeywords, setFilterKeywords] = useState({
+		search: '',
+		category: '',
+		priceRange: {
+			min: '', max: '',
+		},
 	});
 
 	// fetch api data and initialize
@@ -30,8 +32,17 @@ export default function App() {
 			}));
 	}, []);
 
-	const handleItemsArranger = (event, type) => {
-		setItemsArranger(itemsArranger => ({ ...itemsArranger, [type]: event }));
+	const handleFilterKeyword = ({ value, type }) => {
+		if (type) {
+			setFilterKeywords(filterKeywords => ({
+				...filterKeywords,
+				[type]: value,
+			}));
+			return;
+		}
+		return setFilterKeywords(filterKeywords => ({
+			...filterKeywords, ...value,
+		}))
 	}
 
 	// getters
@@ -47,7 +58,7 @@ export default function App() {
 		const cartItemByIdArr = cart.filter(item => id === item.id);
 		return cartItemByIdArr.length ? cartItemByIdArr[0].quantity : 0;
 	}
-	
+
 	// passing dispatched actions as props
 	const mapDispatchToProps = (dispatch) => {
 		return {
@@ -60,14 +71,14 @@ export default function App() {
 		}
 	}
 
-	// compiling props to be passed on page components
+	// compile props to pass to page components
 	const propsForViews = {
 		products: state.products,
 		cart: state.cart,
-		itemsArranger,
+		filterKeywords,
 		getTotalItemsInCart,
 		getItemQty,
-		handleItemsArranger,
+		handleFilterKeyword,
 		mapDispatchToProps: mapDispatchToProps(dispatch),
 	};
 

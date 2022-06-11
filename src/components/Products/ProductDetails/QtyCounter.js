@@ -1,4 +1,3 @@
-import { useCallback } from 'react';
 import { Button, Icon } from 'semantic-ui-react';
 import { StyledQtyCounter, RemoveProductsButton } from './product-details-styling';
 

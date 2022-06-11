@@ -1,4 +1,5 @@
 import { render, screen } from '@testing-library/react';
+import '@testing-library/jest-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
 import Cart from '../views/Cart';
 
@@ -23,13 +24,15 @@ const cartItems = [
 	},
 ];
 
-describe('conditionally render components by value of passed prop', () => {
+describe('Display cart page', () => {
 	it('should render empty card placeholder', () => {
-		const { container } = render(
-			<Router><Cart cart={[]} /></Router>
+		render(
+			<Router>
+				<Cart cart={[]} />
+			</Router>
 		);
 
-		expect(container).toMatchSnapshot();
+		expect(screen.getByText(/your cart is empty/i)).toBeInTheDocument();
 	})
 
 	it('should render cart features', () => {
@@ -40,7 +43,7 @@ describe('conditionally render components by value of passed prop', () => {
 		);
 
 		const totalItems = screen.getAllByText(/6 items/i);
-		expect(totalItems).toBeTruthy();
+		expect(totalItems.length).toBeTruthy();
 	})
 })
 
