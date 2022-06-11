@@ -1,9 +1,10 @@
 import NavItem from './NavItem';
-import { HeaderMenu } from './nav-menu-styling';
 import OutlineCartIcon from '../../assets/icons/outline-shopping-cart.svg';
 import SolidCartIcon from '../../assets/icons/solid-shopping-cart.svg';
 import OutlineBagIcon from '../../assets/icons/outline-shopping-bag.svg';
 import SolidBagIcon from '../../assets/icons/solid-shopping-bag.svg';
+
+import { HeaderMenu } from './nav-menu-styling';
 
 const navProps = [
 	{
@@ -26,12 +27,13 @@ const navProps = [
 	},
 ];
 
-export default function NavMenu() {
+export default function NavMenu({ getTotalItemsInCart }) {
 	const NavItems = navProps.map((item, i) => {
 		const { icon, activeIcon, linkTxt, to, childType } = item;
 		return <NavItem
 			icon={icon}
 			activeIcon={activeIcon}
+			getTotalItemsInCart={to === '/cart' ? getTotalItemsInCart : null}
 			linkTxt={linkTxt}
 			to={to}
 			childType={childType}

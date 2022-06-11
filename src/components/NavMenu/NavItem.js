@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom';
-import { MenuItem, IconBtn } from './nav-menu-styling';
+import { MenuItem, IconBtn, TotalCartItems } from './nav-menu-styling';
 
 export default function NavItem(props) {
 	const {
@@ -7,15 +7,20 @@ export default function NavItem(props) {
 		linkTxt,
 		to,
 		childType,
+		getTotalItemsInCart,
 	} = props;
 	const { standard, active } = icon;
 	return (
 		<MenuItem as='li' childType={childType} >
+
 			<NavLink to={to} className={({ isActive }) =>
 				isActive ? 'nav-item--active' : undefined
 			}>
 				{({ isActive }) => (
 					<>
+						{getTotalItemsInCart &&
+							<TotalCartItems>{getTotalItemsInCart()}</TotalCartItems>
+						}
 						<IconBtn
 							src={isActive ? active : standard}
 							alt={linkTxt}
