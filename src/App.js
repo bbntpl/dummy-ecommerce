@@ -1,6 +1,9 @@
-import { useState, useEffect, useReducer } from 'react';
+import {
+	useState, useEffect, useReducer, useCallback,
+} from 'react';
 import './App.css';
 import 'react-lazy-load-image-component/src/effects/opacity.css';
+
 import Footer from './components/Footer';
 import Header from './components/Header/Header';
 import Page from './components/Page';
@@ -46,12 +49,12 @@ export default function App() {
 	}
 
 	// getters
-	const getTotalItemsInCart = () => {
+	const getTotalItemsInCart = useCallback(() => {
 		const { cart } = state;
 		return cart.reduce((total, item) => {
 			return total += item.quantity;
 		}, 0);
-	}
+	}, [state]);
 
 	const getItemQty = (id) => {
 		const { cart } = state;

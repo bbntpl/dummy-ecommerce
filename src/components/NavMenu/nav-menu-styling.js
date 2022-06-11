@@ -55,3 +55,19 @@ export const IconBtn = styled.img`
 	width: 24px;
 	height: 24px;
 `
+
+export const TotalCartItems = styled.div`
+display: inline-block;
+	position: absolute;
+	top: 5px;
+	right: 2px;
+	padding: 1px 4px;
+	background-color: #c54d59;
+	color: #fff;
+	min-height: 15px;
+	width: max-content;
+	height: max-content;
+	text-align: center;
+	font-size: 11px;
+	border-radius: 13px;
+`
