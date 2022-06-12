@@ -2,6 +2,7 @@
 	"name": "dummy-ecommerce",
 	"version": "0.1.0",
 	"private": true,
+	"homepage": "https://bvrbryn445.github.io/dummy-ecommerce",
 	"dependencies": {
 		"react": "^17.0.0",
 		"react-dom": "^17.0.0",
