@@ -1,11 +1,11 @@
-// import { Container, Dropdown, Search } from 'semantic-ui-react';
-import { FilterOptionsMenu } from './filter-options-styling';
-import PriceRange from './PriceRange';
+import { StyledMenu } from './filter-options-styling';
+import { capitalizeFirstLetter, removeDuplicates } from '../../js/reusableFuncs';
+
 import ItemCategory from './ItemCategory';
 import Searchbar from './Searchbar';
-import { Button, Grid } from 'semantic-ui-react';
+import PriceRange from './PriceRange';
 
-export default function FilterOptions({ filterKeywords, handleFilterKeyword }) {
+export default function FilterOptions({ products, filterKeywords, handleFilterKeyword }) {
 	const { priceRange, category, search } = filterKeywords;
 
 	const resetFilterKeywords = () => {
@@ -13,34 +13,55 @@ export default function FilterOptions({ filterKeywords, handleFilterKeyword }) {
 			...filterKeywords,
 			search: '', category: '', priceRange: { min: '', max: '' },
 		}
-		handleFilterKeyword({
-			value: defaultFilterKeywords,
-			type: '',
-		})
+		handleFilterKeyword({ value: defaultFilterKeywords, type: '' });
 	}
+
+	const areFilterKeywordsEmpty = () => {
+		const { min, max } = priceRange;
+		return !category && !search && !min && !max;
+	}
+
+	// array of unique product categories
+	const productCategories = removeDuplicates(
+		products.map(product => product.category)
+	);
+
+	const categoryOptions = productCategories.map(category => {
+		const optionText = category.includes('-')
+			? category.split('-')
+				.map(capitalizeFirstLetter)
+				.join(' ')
+			: capitalizeFirstLetter(category)
+
+		return {
+			value: category,
+			text: optionText,
+		}
+	});
+	
 	return (
-		<Grid>
-			<Grid.Row>
-				<Grid.Column floated='left'>
-					<FilterOptionsMenu borderless>
-						<Searchbar
-							searchKeyword={search}
-							handleFilterKeyword={handleFilterKeyword}
-						/>
-						<ItemCategory
-							category={category}
-							handleFilterKeyword={handleFilterKeyword}
-						/>
-						<PriceRange
-							priceRange={priceRange}
-							handleFilterKeyword={handleFilterKeyword}
-						/>
-					</FilterOptionsMenu>
-				</Grid.Column>
-				<Grid.Column floated='right'>
-					<Button onClick={resetFilterKeywords}>Reset filter</Button>
-				</Grid.Column>
-			</Grid.Row>
-		</Grid>
+		<StyledMenu>
+			<Searchbar
+				searchKeyword={search}
+				handleFilterKeyword={handleFilterKeyword}
+			/>
+			<ItemCategory
+				category={category}
+				categoryOptions={categoryOptions}
+				handleFilterKeyword={handleFilterKeyword}
+			/>
+			<PriceRange
+				priceRange={priceRange}
+				handleFilterKeyword={handleFilterKeyword}
+			/>
+			{!areFilterKeywordsEmpty() &&
+				<button
+					className='reset-filter'
+					onClick={resetFilterKeywords}
+				>
+					Reset filter
+				</button>
+			}
+		</StyledMenu>
 	)
 }

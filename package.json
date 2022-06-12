@@ -63,9 +63,8 @@
 					"src/components/**",
 					"src/App*",
 					"src/views/**",
-					"**test.js"
+					"*.test.js"
 				],
-				"excludedFiles": "*.test.js",
 				"rules": {
 					"max-lines-per-function": [
 						"error",

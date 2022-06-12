@@ -10,6 +10,8 @@ export default function NavItem(props) {
 		getTotalItemsInCart,
 	} = props;
 	const { standard, active } = icon;
+	const isTotalItemsValid =
+		getTotalItemsInCart === null ? 0 : getTotalItemsInCart() > 0;
 	return (
 		<MenuItem as='li' childType={childType} >
 
@@ -18,8 +20,9 @@ export default function NavItem(props) {
 			}>
 				{({ isActive }) => (
 					<>
-						{getTotalItemsInCart &&
-							<TotalCartItems>{getTotalItemsInCart()}</TotalCartItems>
+						{isTotalItemsValid
+							? <TotalCartItems>{getTotalItemsInCart()}</TotalCartItems>
+							: null
 						}
 						<IconBtn
 							src={isActive ? active : standard}

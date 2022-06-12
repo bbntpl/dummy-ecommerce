@@ -1,14 +1,15 @@
 import {
-	useState, useEffect, useReducer, useCallback,
+	useState, useEffect, useReducer, useCallback, memo,
 } from 'react';
 import './App.css';
 import 'react-lazy-load-image-component/src/effects/opacity.css';
+import { stateReducer } from './js/reducers/stateReducer';
 
 import Footer from './components/Footer';
 import Header from './components/Header/Header';
 import Page from './components/Page';
 
-import { stateReducer } from './js/reducers/stateReducer';
+const MemoizedFooter = memo(Footer);
 
 const DUMMY_JSON_ARGS = { limit: 60, skip: 0 };
 const { limit, skip } = DUMMY_JSON_ARGS;
@@ -35,18 +36,17 @@ export default function App() {
 			}));
 	}, []);
 
-	const handleFilterKeyword = ({ value, type }) => {
+	const handleFilterKeyword = useCallback(({ value, type }) => {
 		if (type) {
 			setFilterKeywords(filterKeywords => ({
-				...filterKeywords,
-				[type]: value,
+				...filterKeywords, [type]: value,
 			}));
-			return;
+		} else {
+			setFilterKeywords(filterKeywords => ({
+				...filterKeywords, ...value,
+			}))
 		}
-		return setFilterKeywords(filterKeywords => ({
-			...filterKeywords, ...value,
-		}))
-	}
+	}, []);
 
 	// getters
 	const getTotalItemsInCart = useCallback(() => {
@@ -89,7 +89,7 @@ export default function App() {
 		<div className="App">
 			<Header getTotalItemsInCart={getTotalItemsInCart} />
 			<Page {...propsForViews} />
-			<Footer />
+			<MemoizedFooter />
 		</div>
 	);
 }

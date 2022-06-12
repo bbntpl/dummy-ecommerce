@@ -15,12 +15,13 @@ export default function Shop(props) {
 	return (
 		<Container>
 			<FilterOptions
+				products={products}
 				filterKeywords={filterKeywords}
 				handleFilterKeyword={handleFilterKeyword}
 			/> {
 				<ProductList
-					filterKeywords={filterKeywords}
 					products={products}
+					filterKeywords={filterKeywords}
 					addItemToCart={addItemToCart}
 					getItemQty={getItemQty}
 				/>

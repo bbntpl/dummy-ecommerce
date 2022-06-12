@@ -1,5 +1,6 @@
 export const capitalizeFirstLetter = ([first, ...rest]) => {
-	return [first.toUpperCase(), ...rest].join('');
+	const lowercaseRest = rest.join('').toLowerCase().split('');
+	return [first.toUpperCase(), ...lowercaseRest].join('');
 }
 
 export const discountedPrice = (price, discount) => {
