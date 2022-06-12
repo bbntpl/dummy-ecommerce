@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Icon } from 'semantic-ui-react';
+import { SearchKeywordForm } from './filter-options-styling';
 
 export default function Searchbar(props) {
 	const { searchKeyword, handleFilterKeyword } = props;
@@ -10,6 +11,10 @@ export default function Searchbar(props) {
 		setState({ value });
 	}
 
+	useEffect(() => {
+		setState({ value: searchKeyword });
+	}, [searchKeyword]);
+
 	const handleFormSubmit = (event) => {
 		event.preventDefault();
 		handleFilterKeyword({
@@ -17,12 +22,19 @@ export default function Searchbar(props) {
 			type: 'search',
 		});
 	}
+
 	return (
-		<form onSubmit={(e) => handleFormSubmit(e)}>
-			<input value={state.value} onChange={(e) => handleChange(e)} />
+		<SearchKeywordForm
+			onSubmit={(e) => handleFormSubmit(e)}
+		>
+			<input
+				placeholder={'Search for keyword'}
+				value={state.value}
+				onChange={(e) => handleChange(e)}
+			/>
 			<button type='submit'>
 				<Icon name='search' />
 			</button>
-		</form>
+		</SearchKeywordForm>
 	)
 }

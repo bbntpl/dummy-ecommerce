@@ -33,8 +33,9 @@ export default function ProductList(props) {
 		if (filterKeywords.search) {
 			const findKeywordMatch = (object) => {
 				const productPropKeys = ['title', 'brand', 'category'];
-				const strRegex = (str) => str.match(`/${filterKeywords.search}/gi`);
-				return productPropKeys.some(key => strRegex(object[key]));
+				const lowerCaseKeyword = filterKeywords.search.toLowerCase();
+				const strMatch = (str) => str.includes(lowerCaseKeyword);
+				return productPropKeys.some(key => strMatch(object[key].toLowerCase()));
 			}
 			mutationFilter(copiedProducts, findKeywordMatch);
 		}
@@ -42,27 +43,26 @@ export default function ProductList(props) {
 		// filter products array by category
 		if (filterKeywords.category) {
 			const findCategoryMatch = ({ category }) => {
-				return filterKeywords.category.match(`/${category}/gi`);
+				return filterKeywords.category === category;
 			}
 			mutationFilter(copiedProducts, findCategoryMatch);
 		}
 
 		// filter products array by price range
-		if (priceRange.min || priceRange.max) {
+		if (priceRange && (priceRange.min || priceRange.max)) {
 			const { min, max } = priceRange;
 			const findPriceRangeMatch = ({ price, discountPercentage }) => {
 				const newPrice = discountedPrice(price, discountPercentage);
-				const roundedPrice = DecimalPrecision(newPrice, 2);
+				const roundedPrice = DecimalPrecision.round(newPrice, 2);
 				if (!min && max) {
-					return 0 < roundedPrice && max < roundedPrice;
+					return 0 < roundedPrice && max > roundedPrice;
 				} else if (min && !max) {
-					return roundedPrice > max;
+					return roundedPrice > min;
 				}
-				return min < roundedPrice && max < roundedPrice;
+				return min < roundedPrice && max > roundedPrice;
 			}
 			mutationFilter(copiedProducts, findPriceRangeMatch);
 		}
-
 		setFilteredProducts(([...copiedProducts]));
 	}, [filterKeywords, products]);
 
@@ -77,8 +77,7 @@ export default function ProductList(props) {
 	}, [products, filteredProducts, IteratedProducts.length]);
 
 	return (
-		isLoading
-			? <Loader active>Loading</Loader>
+		isLoading ? <Loader active>Loading</Loader>
 			: <>
 				<ProductListContainer columns={4} only='computer'>
 					{IteratedProducts}

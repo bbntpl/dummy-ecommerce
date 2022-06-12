@@ -28,6 +28,7 @@ margin: 0;
 	margin-left: ${props => props.childType === 'button' ? '1.5' : '.75'}rem;
 }
 & > a {
+	position: relative;
 	display: flex;
 	align-items: center;
 	color: #4D0000!important;
@@ -59,12 +60,12 @@ export const IconBtn = styled.img`
 export const TotalCartItems = styled.div`
 display: inline-block;
 	position: absolute;
-	top: 5px;
-	right: 2px;
-	padding: 1px 4px;
+	top: -5px;
+	right: -10px;
+	padding: 0 4px;
 	background-color: #c54d59;
 	color: #fff;
-	min-height: 15px;
+	min-width: 20px;
 	width: max-content;
 	height: max-content;
 	text-align: center;

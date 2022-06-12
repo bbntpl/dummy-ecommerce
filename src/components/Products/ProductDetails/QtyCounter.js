@@ -11,7 +11,6 @@ function QtyCounter(props) {
 		totalQtyFromCart,
 	} = props;
 
-
 	// this is the future amount of specific item
 	// after dispatching the event from add to cart button
 	const futureQtyFromCart = qtyAmount + totalQtyFromCart;
