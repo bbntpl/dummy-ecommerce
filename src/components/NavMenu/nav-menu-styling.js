@@ -33,7 +33,7 @@ margin: 0;
 	align-items: center;
 	color: #4D0000!important;
 	padding: .5rem 0;
-	font-weight: ${props => props.isActive ? 'bold' : 400};
+	font-weight: ${props => props.isActive ? 700 : 400};
 	text-transform: uppercase;
 	background:
 	${props => props.childType === 'link'

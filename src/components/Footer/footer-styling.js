@@ -22,7 +22,7 @@ export const MediaGrid = styled(Grid)`
 
 export const FooterLink = styled(Button)`
 	color: #4D0000!important;
-	font-weight: bold;
+	font-weight: 400;
 	font-size: 1.5rem;
 	display: flex;
   flex-direction: column;

@@ -20,8 +20,6 @@ jest.mock('../ProductList', () => {
 		),
 	}
 })
-const utils = jest.createMockFromModule('../ProductListContainer').default;
-console.log(utils);
 
 jest.mock('../ProductListContainer', () => ({ children }) => (
 	<div data-testid='list-container'>

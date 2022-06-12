@@ -21,6 +21,9 @@ export const Hero = styled(Container)`
 		border: none!important;
 		box-shadow: none!important;
 		z-index: 200;
+		& > button {
+			margin: 0 1rem!important;
+		}
 	}
 `
 

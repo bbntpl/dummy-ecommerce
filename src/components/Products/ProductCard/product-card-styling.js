@@ -30,7 +30,7 @@ export const StyledProductCard = styled(Segment)`
 `
 
 export const Details = styled(StyledProductCard)`
-	${productCardStyles}
+	background-color: hsla(0,0%,40%,.08)!important;
 	font-weight: 700!important;
 	gap: 5px;
 	width: 100%;

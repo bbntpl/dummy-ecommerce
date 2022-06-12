@@ -29,10 +29,14 @@ align-items: center;
 position: relative;
 & > input {
 	background-color: transparent;
-	color: #4D0000;
+	color: black;
 	border: none;
 	border-bottom: 1px solid #4D0000;
 	width: 200px;
+	::placeholder {
+  color: #4D0000;
+  opacity: .6;
+	}
 }
 & > button {
 	background-color: transparent;
