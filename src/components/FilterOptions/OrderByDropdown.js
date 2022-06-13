@@ -5,7 +5,9 @@ export default function OrderByDropdown({ orderBy, handleItemsArranger }) {
 		{ text: 'Price', value: 'price' },
 		{ text: 'Discount Rate', value: 'discountPercentage' },
 		{ text: 'Item Title', value: 'title' },
+		{ text: 'Rating', value: 'rating' },
 	];
+
 	const handleChange = (_, { value }) => {
 		handleItemsArranger({ value, type: 'orderBy' });
 	}
@@ -16,6 +18,7 @@ export default function OrderByDropdown({ orderBy, handleItemsArranger }) {
 
 	const dropdownText = indexByOrderValue > -1 ?
 		orderByOptions[indexByOrderValue].text : '';
+		
 	return (
 		<Dropdown
 			text={`Order by: ${dropdownText}`}

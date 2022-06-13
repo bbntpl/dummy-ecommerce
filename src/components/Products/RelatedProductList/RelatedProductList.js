@@ -39,7 +39,6 @@ const MappedRelatedProducts = ({ relatedProducts }) => {
 		)
 	})
 }
-
 function RelatedProductList(props) {
 	const { products, productCategory, productId } = props;
 	const [relatedProducts, setRelatedProducts] = useState();
@@ -51,17 +50,14 @@ function RelatedProductList(props) {
 			return productCategory === category && productId !== id;
 		});
 		setRelatedProducts(getProductsByCategory);
-	}, [products, productId, productCategory]);
+	}, []);
 
 	return (
 		(!!relatedProducts) &&
 		<Container>
 			<h1>Related Products</h1>
 			<Grid doubling>
-				<Grid.Row columns={3} only='computer'>
-					<MappedRelatedProducts relatedProducts={relatedProducts} />
-				</Grid.Row>
-				<Grid.Row columns={3} only='tablet'>
+				<Grid.Row columns={3} only='computer tablet'>
 					<MappedRelatedProducts relatedProducts={relatedProducts} />
 				</Grid.Row>
 				<Grid.Row columns={2} only='mobile'>
@@ -72,4 +68,5 @@ function RelatedProductList(props) {
 	)
 }
 
-export default memo(RelatedProductList);
+const MemoizedRelatedProductList = memo(RelatedProductList);
+export default MemoizedRelatedProductList;

@@ -7,12 +7,12 @@ import { stateReducer } from './js/reducers/stateReducer';
 
 import Footer from './components/Footer';
 import Header from './components/Header/Header';
-import Page from './components/Page';
+import Page from './route';
 
 const MemoizedFooter = memo(Footer);
 
 // setup api varibles
-const DUMMY_JSON_ARGS = { limit: 60, skip: 0 };
+const DUMMY_JSON_ARGS = { limit: 70, skip: 0 };
 const { limit, skip } = DUMMY_JSON_ARGS;
 const jsonURL = `https://dummyjson.com/products?limit=${limit}&skip=${skip}`;
 
@@ -28,11 +28,11 @@ export default function App() {
 				min: '', max: '',
 			},
 			orderBy: '',
-			sortBy: 'asc',
+			sortBy: 'desc',
 		},
 		previous: {
-			// items arranger type used previously 
-			usedType: 'asc',
+			// used items arranger method previously 
+			usedType: 'desc',
 		},
 	});
 

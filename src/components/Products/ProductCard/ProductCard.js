@@ -4,7 +4,6 @@ import { StyledProductCard, Details } from './product-card-styling';
 import TitleRating from './TitleRating';
 import Prices from './Prices';
 import Thumbnail from './Thumbnail';
-import PlaceholderImage from '../../../assets/images/image-placeholder.png';
 
 const ProductCard = forwardRef((props, ref) => {
 	const { product, addItemToCart, getItemQty } = props;
@@ -32,7 +31,6 @@ const ProductCard = forwardRef((props, ref) => {
 				src={thumbnail} 
 				category={category} 
 				id={id} 
-				placeholder={PlaceholderImage}
 				/>
 				<Details>
 					<TitleRating
