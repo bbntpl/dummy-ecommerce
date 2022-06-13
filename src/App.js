@@ -11,6 +11,7 @@ import Page from './components/Page';
 
 const MemoizedFooter = memo(Footer);
 
+// setup api varibles
 const DUMMY_JSON_ARGS = { limit: 60, skip: 0 };
 const { limit, skip } = DUMMY_JSON_ARGS;
 const jsonURL = `https://dummyjson.com/products?limit=${limit}&skip=${skip}`;
@@ -18,11 +19,20 @@ const jsonURL = `https://dummyjson.com/products?limit=${limit}&skip=${skip}`;
 export default function App() {
 	const initialState = { products: [], cart: [] };
 	const [state, dispatch] = useReducer(stateReducer, initialState);
-	const [filterKeywords, setFilterKeywords] = useState({
-		search: '',
-		category: '',
-		priceRange: {
-			min: '', max: '',
+	const [itemsArranger, setItemsArranger] = useState({
+		// type of methods used to arrange products in shop
+		methods: {
+			search: '',
+			category: '',
+			priceRange: {
+				min: '', max: '',
+			},
+			orderBy: '',
+			sortBy: 'asc',
+		},
+		previous: {
+			// items arranger type used previously 
+			usedType: 'asc',
 		},
 	});
 
@@ -36,14 +46,35 @@ export default function App() {
 			}));
 	}, []);
 
-	const handleFilterKeyword = useCallback(({ value, type }) => {
-		if (type) {
-			setFilterKeywords(filterKeywords => ({
-				...filterKeywords, [type]: value,
-			}));
+	const handleItemsArranger = useCallback(({ value, type }) => {
+		const lastMethodUsed = type === itemsArranger.previous.usedType;
+		const isAnyValueChanged = !(lastMethodUsed
+			&& value === itemsArranger.methods[lastMethodUsed]);
+
+		//if nothing changed skip the state update
+		if (!isAnyValueChanged) return;
+
+		// if there is no type, directly insert value
+		// as the set of properties inside the method prop 
+		if(!type) {
+			setItemsArranger(itemsArranger => ({
+				...itemsArranger,
+				methods: {
+					...itemsArranger.methods,
+					...value,
+				},
+			}))
 		} else {
-			setFilterKeywords(filterKeywords => ({
-				...filterKeywords, ...value,
+			setItemsArranger(itemsArranger => ({
+				...itemsArranger,
+				methods: {
+					...itemsArranger.methods,
+					[type]: value,
+				},
+				previous: {
+					...itemsArranger.previous,
+					usedType: lastMethodUsed,
+				},
 			}))
 		}
 	}, []);
@@ -78,10 +109,10 @@ export default function App() {
 	const propsForViews = {
 		products: state.products,
 		cart: state.cart,
-		filterKeywords,
+		itemsArrangerMethods: itemsArranger.methods,
 		getTotalItemsInCart,
 		getItemQty,
-		handleFilterKeyword,
+		handleItemsArranger,
 		mapDispatchToProps: mapDispatchToProps(dispatch),
 	};
 

@@ -11,8 +11,8 @@ export default function Page(props) {
 	const {
 		products,
 		cart,
-		filterKeywords,
-		handleFilterKeyword,
+		itemsArrangerMethods,
+		handleItemsArranger,
 		mapDispatchToProps,
 		getItemQty,
 	} = props;
@@ -38,8 +38,8 @@ export default function Page(props) {
 			path: '/shop',
 			element: <Shop
 				products={products}
-				filterKeywords={filterKeywords}
-				handleFilterKeyword={handleFilterKeyword}
+				itemsArrangerMethods={itemsArrangerMethods}
+				handleItemsArranger={handleItemsArranger}
 				addItemToCart={addItemToCart}
 				getItemQty={getItemQty}
 			/>,

@@ -1,10 +1,12 @@
+import { forwardRef } from 'react';
 import { Button, Icon } from 'semantic-ui-react';
 import { StyledProductCard, Details } from './product-card-styling';
 import TitleRating from './TitleRating';
 import Prices from './Prices';
 import Thumbnail from './Thumbnail';
+import PlaceholderImage from '../../../assets/images/image-placeholder.png';
 
-export default function ProductCard(props) {
+const ProductCard = forwardRef((props, ref) => {
 	const { product, addItemToCart, getItemQty } = props;
 	const {
 		id,
@@ -24,25 +26,34 @@ export default function ProductCard(props) {
 		addItemToCart({ targetId: id });
 	}
 	return (
-		<StyledProductCard>
-			<Thumbnail src={thumbnail} category={category} id={id} />
-			<Details>
-				<TitleRating
-					title={title}
-					id={id}
-					rating={rating}
+		<div ref={ref} style={{ height: '100%' }}>
+			<StyledProductCard>
+				<Thumbnail 
+				src={thumbnail} 
+				category={category} 
+				id={id} 
+				placeholder={PlaceholderImage}
 				/>
-				<h3 className='product-card__discount'>{`SAVE ${discountPercentage}%`}</h3>
-				<Prices price={price} discount={discountPercentage} />
-				<Button
-					onClick={() => addItemToCartIfAvailable(id)}
-					size='large'
-					disabled={!isStockMoreThanQty}
-				>
-					<Icon name='shopping cart' />
-					{isStockMoreThanQty ? 'Add to cart' : 'Not enough stock'}
-				</Button>
-			</Details>
-		</StyledProductCard>
+				<Details>
+					<TitleRating
+						title={title}
+						id={id}
+						rating={rating}
+					/>
+					<h3 className='product-card__discount'>{`SAVE ${discountPercentage}%`}</h3>
+					<Prices price={price} discount={discountPercentage} />
+					<Button
+						onClick={() => addItemToCartIfAvailable(id)}
+						size='large'
+						disabled={!isStockMoreThanQty}
+					>
+						<Icon name='shopping cart' />
+						{isStockMoreThanQty ? 'Add to cart' : 'Not enough stock'}
+					</Button>
+				</Details>
+			</StyledProductCard>
+		</div>
 	)
-}
+})
+
+export default ProductCard;

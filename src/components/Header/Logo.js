@@ -14,7 +14,11 @@ export default function DiffSizedLogos() {
 	return logoImports.map(logo => {
 		const { device, size, src } = logo;
 		return (
-			<Grid.Column only={device} key={size}>
+			<Grid.Column
+				only={device}
+				key={size}
+				width={5}
+			>
 				<ImageLink to='/'>
 					<span>
 						<Image

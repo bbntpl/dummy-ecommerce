@@ -8,11 +8,11 @@ const MemoizedLogo = memo(DiffSizedLogos);
 
 export default function Header({ getTotalItemsInCart }) {
 	return (
-		<StyledHeader className='App__header'>
-			<Grid stackable container doubling>
+		<StyledHeader>
+			<Grid container>
 				<Grid.Row columns={2} verticalAlign='middle'>
 					<MemoizedLogo />
-					<Grid.Column>
+					<Grid.Column width={11}>
 						<NavMenu getTotalItemsInCart={getTotalItemsInCart} />
 					</Grid.Column>
 				</Grid.Row>

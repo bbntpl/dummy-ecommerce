@@ -64,7 +64,7 @@
 					"src/components/**",
 					"src/App*",
 					"src/views/**",
-					"*.test.js"
+					"src/**.test.js"
 				],
 				"rules": {
 					"max-lines-per-function": [
@@ -76,7 +76,7 @@
 					"max-statements": [
 						"error",
 						{
-							"max": 15
+							"max": 20
 						}
 					]
 				}
