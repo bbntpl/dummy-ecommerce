@@ -3,10 +3,12 @@ import { Button, Icon } from 'semantic-ui-react';
 import { StyledProductCard, Details } from './product-card-styling';
 import TitleRating from './TitleRating';
 import Prices from './Prices';
-import Thumbnail from './Thumbnail';
+import MemoizedThumbnail from './Thumbnail';
+import useTimedEvent from '../../../hooks/useTimedEvent';
 
 const ProductCard = forwardRef((props, ref) => {
 	const { product, addItemToCart, getItemQty } = props;
+	const [isTimerRunning, dispatch] = useTimedEvent(500);
 	const {
 		id,
 		title,
@@ -22,15 +24,18 @@ const ProductCard = forwardRef((props, ref) => {
 	// disallow to add item if quantity is more than the stock
 	const addItemToCartIfAvailable = (id) => {
 		if (!isStockMoreThanQty) return;
-		addItemToCart({ targetId: id });
+		dispatch({
+			type: 'setup_event',
+			payload: () => addItemToCart({ targetId: id }),
+		});
 	}
 	return (
 		<div ref={ref} style={{ height: '100%' }}>
 			<StyledProductCard>
-				<Thumbnail 
-				src={thumbnail} 
-				category={category} 
-				id={id} 
+				<MemoizedThumbnail
+					src={thumbnail}
+					category={category}
+					id={id}
 				/>
 				<Details>
 					<TitleRating
@@ -43,7 +48,8 @@ const ProductCard = forwardRef((props, ref) => {
 					<Button
 						onClick={() => addItemToCartIfAvailable(id)}
 						size='large'
-						disabled={!isStockMoreThanQty}
+						disabled={isTimerRunning || !isStockMoreThanQty}
+						loading={isTimerRunning}
 					>
 						<Icon name='shopping cart' />
 						{isStockMoreThanQty ? 'Add to cart' : 'Not enough stock'}

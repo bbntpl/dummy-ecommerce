@@ -1,13 +1,16 @@
-import { StyledMenu } from './filter-options-styling';
+import { memo } from 'react';
+
 import { capitalizeFirstLetter, removeDuplicates } from '../../js/reusableFuncs';
 
+import { StyledMenu } from './filter-options-styling';
 import ItemCategory from './ItemCategory';
 import Searchbar from './Searchbar';
 import PriceRange from './PriceRange';
 import SortByDropdown from './SortByDropdown';
 import OrderByDropdown from './OrderByDropdown';
 
-export default function FilterOptions({ products, itemsArrangerMethods, handleItemsArranger }) {
+const FilterOptions = memo((props) => {
+	const { products, itemsArrangerMethods, handleItemsArranger } = props;
 	const { priceRange, category, search, orderBy, sortBy } = itemsArrangerMethods;
 
 	const resetItemsArrangerMethods = () => {
@@ -76,4 +79,6 @@ export default function FilterOptions({ products, itemsArrangerMethods, handleIt
 			}
 		</StyledMenu>
 	)
-}
+});
+
+export default FilterOptions;
