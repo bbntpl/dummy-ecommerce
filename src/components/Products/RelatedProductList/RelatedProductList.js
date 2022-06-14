@@ -50,7 +50,7 @@ function RelatedProductList(props) {
 			return productCategory === category && productId !== id;
 		});
 		setRelatedProducts(getProductsByCategory);
-	}, []);
+	}, [products, productId, productCategory]);
 
 	return (
 		(!!relatedProducts) &&

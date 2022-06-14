@@ -6,7 +6,7 @@ import DiffSizedLogos from './Logo';
 
 const MemoizedLogo = memo(DiffSizedLogos);
 
-export default function Header({ getTotalItemsInCart }) {
+const Header = memo(({ getTotalItemsInCart }) => {
 	return (
 		<StyledHeader>
 			<Grid container>
@@ -19,4 +19,6 @@ export default function Header({ getTotalItemsInCart }) {
 			</Grid>
 		</StyledHeader>
 	)
-}
+});
+
+export default Header;

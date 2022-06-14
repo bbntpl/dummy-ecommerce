@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, memo } from 'react';
 import { Loader } from 'semantic-ui-react';
 import { discountedPrice, mutationFilter } from '../../../js/reusableFuncs';
 import DecimalPrecision from '../../../js/decimalPrecision';
@@ -6,7 +6,7 @@ import DecimalPrecision from '../../../js/decimalPrecision';
 import { StyledFlipMove } from './product-list-styling';
 import ProductCard from '../ProductCard';
 
-export default function ProductList(props) {
+const ProductList = (props) => {
 	const { products, addItemToCart, getItemQty, itemsArrangerMethods } = props;
 
 	const [filteredProducts, setFilteredProducts] = useState(products);
@@ -115,10 +115,12 @@ export default function ProductList(props) {
 			? <Loader active>Loading</Loader>
 			: <StyledFlipMove
 				duration={400}
-				enterAnimation='accordionVertical'
+				enterAnimation='fade'
 				leaveAnimation='fade'
 			>
 				{IteratedProducts}
 			</StyledFlipMove>
 	)
-}
+};
+
+export default ProductList;

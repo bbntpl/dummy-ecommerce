@@ -1,3 +1,5 @@
+import { memo } from 'react';
+
 import { Grid, Image } from 'semantic-ui-react';
 import { ImageLink } from './header-styling';
 import SmallLogo from '../../assets/logo/xsmall-themerc-logo.png';
@@ -10,7 +12,7 @@ const logoImports = [
 	{ device: 'computer', size: 'large', src: LargeLogo },
 ];
 
-export default function DiffSizedLogos() {
+const DiffSizedLogos = memo(() => {
 	return logoImports.map(logo => {
 		const { device, size, src } = logo;
 		return (
@@ -31,4 +33,6 @@ export default function DiffSizedLogos() {
 			</Grid.Column>
 		)
 	});
-}
+})
+
+export default DiffSizedLogos;
