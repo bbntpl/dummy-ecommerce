@@ -4,15 +4,15 @@
 	"private": true,
 	"homepage": "https://bvrbryn445.github.io/dummy-ecommerce",
 	"dependencies": {
-		"react": "^17.0.0",
-		"react-dom": "^17.0.0",
-		"react-flip-move": "^3.0.4",
-		"react-lazy-load-image-component": "^1.5.4",
-		"react-router-dom": "^6.3.0",
+		"react": "^17.0.2",
+		"react-dom": "^17.0.2",
+		"react-flip-move": "^3.0.5",
+		"react-lazy-load-image-component": "^1.5.6",
+		"react-router-dom": "^6.11.1",
 		"react-scripts": "5.0.1",
-		"semantic-ui-less": "^2.4.1",
-		"semantic-ui-react": "^2.1.2",
-		"styled-components": "^5.3.5"
+		"semantic-ui-less": "^2.5.0",
+		"semantic-ui-react": "^2.1.4",
+		"styled-components": "^5.3.10"
 	},
 	"scripts": {
 		"start": "craco start",
@@ -96,10 +96,10 @@
 		]
 	},
 	"devDependencies": {
-		"@craco/craco": "^6.4.3",
-		"@semantic-ui-react/craco-less": "^2.0.2",
-		"@testing-library/jest-dom": "^5.16.4",
-		"@testing-library/react": "^12.1.2",
+		"@craco/craco": "^7.0.0",
+		"@semantic-ui-react/craco-less": "^3.0.0",
+		"@testing-library/jest-dom": "^5.16.5",
+		"@testing-library/react": "^12.1.5",
 		"@testing-library/user-event": "^13.5.0"
 	},
 	"jest": {
