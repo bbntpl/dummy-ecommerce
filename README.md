@@ -11,6 +11,10 @@ An application that primarily operate as e-commerce website made with React(Hook
 - React Lazy Load Image Component
 - Semantic UI React
 
+### Preview
+![Dummy Ecommerce Homepage](./src/screenshots/dummy-ecommerce__ss.png)
+![Dummy Ecommerce Products](./src/screenshots/dummy-ecommerce__ss2.png)
+![Dummy Ecommerce Cart](./src/screenshots/dummy-ecommerce__ss3.png)
 ### Credits
 - Image by [Hugo Hercer](https://pixabay.com/es/users/loginueve_ilustra-12954610/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=5217035) at [Pixabay](https://pixabay.com/es/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=5217035)
 
