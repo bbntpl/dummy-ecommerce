@@ -44,6 +44,7 @@ export default function useTimedEvent(milliseconds = 5000) {
 			dispatch({ type: 'start', payload: timer });
 			return () => clearTimeout(timer);
 		}
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [isTimerRunning]);
 
 	return [isTimerRunning, dispatch];

@@ -1,4 +1,4 @@
-import { useState, useEffect, memo } from 'react';
+import { useState, useEffect } from 'react';
 import { Loader } from 'semantic-ui-react';
 import { discountedPrice, mutationFilter } from '../../../js/reusableFuncs';
 import DecimalPrecision from '../../../js/decimalPrecision';

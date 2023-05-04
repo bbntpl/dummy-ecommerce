@@ -31,6 +31,7 @@ export default function Product(props) {
 			setIsLoading(isLoading => !isLoading);
 			setProduct(undefined);
 		}
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [id])
 
 	useEffect(() => {
