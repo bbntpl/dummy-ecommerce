@@ -6,7 +6,7 @@ import App from './App';
 
 const root = document.getElementById('root');
 render(
-	<Router basename='/dummy-ecommerce'>
+	<Router>
 		<App />
 	</Router>
 	, root);
