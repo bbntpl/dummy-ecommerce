@@ -1,5 +1,7 @@
 # Dummy E-Commerce
-An application that primarily operate as e-commerce website made with React(Hooks). It includes shop, individual product, and cart pages.
+An application that primarily operate as e-commerce website made with React(Hooks). It includes shop, individual products, and cart page.
+
+Click [here](https://dapper-pastelito-04ff24.netlify.app) to access live demo.
 
 ## APIs
 - [DummyJSON - Fake REST API of JSON data for development](https://dummyjson.com/)
