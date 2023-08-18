@@ -6,6 +6,8 @@ Click [here](https://dapper-pastelito-04ff24.netlify.app) to access live demo.
 ## APIs
 - [DummyJSON - Fake REST API of JSON data for development](https://dummyjson.com/)
 
+Thanks to [Ovi](https://github.com/Ovi) for the fake dummy REST API.
+
 ### Dependencies used
 - React Flip Move
 - Styled Components
