@@ -7,7 +7,7 @@ export default function CopyrightLink() {
 			primary
 			animated='vertical'
 			as='a'
-			href='https://github.com/bvrbryn445'
+			href='https://github.com/bbntpl'
 			target='_blank'
 		>
 			{`©Themerc ${currentYear}`}
